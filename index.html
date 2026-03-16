@@ -1,0 +1,1959 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario El Taco · Javi TJ · 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crema: #FFF8F0;
+    --naranja: #F4845F;
+    --naranja-suave: #FAC8A3;
+    --rosado: #F7C5B5;
+    --rojo: #D94F3D;
+    --amarillo: #F9C74F;
+    --verde: #6BB77B;
+    --gris-oscuro: #2A2A2A;
+    --gris-medio: #6B6B6B;
+    --gris-claro: #E8E0D6;
+    --blanco: #FFFFFF;
+    --sombra: rgba(180, 90, 40, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(135deg, #FFF3E8 0%, #FAE0CE 30%, #F9D5C0 60%, #FDE8D8 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 40px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(249,199,79,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(244,132,95,0.2) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  /* ══════════════════════════════
+     TARJETA PRINCIPAL
+  ══════════════════════════════ */
+  .tarjeta {
+    background: #FFFCF8;
+    border-radius: 24px;
+    box-shadow:
+      0 4px 6px rgba(180,90,40,0.06),
+      0 12px 40px rgba(180,90,40,0.12),
+      0 32px 80px rgba(180,90,40,0.08);
+    overflow: hidden;
+    margin-bottom: 16px;
+    animation: flotar 0.6s ease-out;
+  }
+
+  @keyframes flotar {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ══════════════════════════════
+     CABECERA
+  ══════════════════════════════ */
+  .cabecera {
+    background: linear-gradient(135deg, var(--gris-oscuro) 0%, #3D3530 100%);
+    padding: 16px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .cabecera-izq {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .perforaciones {
+    display: flex;
+    gap: 6px;
+  }
+
+  .punto {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+  }
+  .punto-rojo { background: #FF5F57; }
+  .punto-amarillo { background: #FEBC2E; }
+  .punto-verde { background: #28C840; }
+
+  .titulo-cal {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+  }
+
+  .sello {
+    background: var(--naranja);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(244,132,95,0.5);
+  }
+
+  /* ══════════════════════════════
+     CUERPO FECHA
+  ══════════════════════════════ */
+  .cuerpo-fecha {
+    padding: 24px 28px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .etiqueta-hoy {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .numero-dia {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(100px, 28vw, 140px);
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--gris-oscuro);
+    transition: color 0.3s;
+    letter-spacing: -4px;
+  }
+
+  .numero-dia.festivo { color: var(--rojo); }
+  .numero-dia.domingo { color: var(--rojo); }
+
+  .nombre-dia-completo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gris-oscuro);
+    margin-top: 2px;
+    font-style: italic;
+    transition: color 0.3s;
+  }
+
+  .nombre-dia-completo.festivo,
+  .nombre-dia-completo.domingo { color: var(--rojo); }
+
+  .mes-anyo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: var(--gris-medio);
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .mes-anyo .separador {
+    width: 3px; height: 3px;
+    background: var(--naranja);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ══════════════════════════════
+     BADGES (festivo, estación, eclipse)
+  ══════════════════════════════ */
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 28px 0;
+    min-height: 10px;
+  }
+
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    animation: aparecer 0.4s ease;
+  }
+
+  @keyframes aparecer {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .badge-festivo { background: #FDECEA; color: var(--rojo); border: 1px solid #F5C6C2; }
+  .badge-local   { background: #FFF3E0; color: #C17B10; border: 1px solid #F9C880; }
+  .badge-estacion{ background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+  .badge-especial{ background: #EDE7F6; color: #5E35B1; border: 1px solid #CE93D8; }
+  .badge-eclipse { background: #1A1A2E; color: #F4D35E; border: 1px solid #F4D35E; }
+  .badge-mundial { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+  .badge-amor    { background: #FCE4EC; color: #AD1457; border: 1px solid #F48FB1; }
+  .badge-mujer   { background: #F3E5F5; color: #7B1FA2; border: 1px solid #CE93D8; }
+
+  /* ══════════════════════════════
+     DIVIDER
+  ══════════════════════════════ */
+  .divider {
+    margin: 18px 28px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gris-claro), transparent);
+  }
+
+  /* ══════════════════════════════
+     FILAS DE INFO (Santo, Luna, Amanecer)
+  ══════════════════════════════ */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 28px;
+    margin-bottom: 14px;
+  }
+
+  .info-card {
+    background: linear-gradient(135deg, #FFF8F2 0%, #FFF3E8 100%);
+    border: 1px solid rgba(244,132,95,0.18);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+
+  .info-card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .info-valor {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gris-oscuro);
+    line-height: 1.3;
+  }
+
+  .info-sub {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--gris-medio);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .luna-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ══════════════════════════════
+     SANTORAL
+  ══════════════════════════════ */
+  .seccion {
+    margin: 0 28px 14px;
+  }
+
+  .seccion-titulo {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .seccion-titulo::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--naranja-suave), transparent);
+  }
+
+  .santoral-contenido {
+    background: #FFFCF8;
+    border: 1px solid var(--gris-claro);
+    border-radius: 12px;
+    padding: 12px 16px;
+  }
+
+  .santo-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gris-oscuro);
+    font-style: italic;
+  }
+
+  .santo-desc {
+    font-size: 12px;
+    color: var(--gris-medio);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* ══════════════════════════════
+     FRASE DEL DÍA
+  ══════════════════════════════ */
+  .frase-bloque {
+    background: linear-gradient(135deg, var(--gris-oscuro) 0%, #3D3530 100%);
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .frase-bloque::before {
+    content: '\201C';
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    color: rgba(244,132,95,0.18);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .frase-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .frase-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  .frase-autor {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* ══════════════════════════════
+     FAMOSOS
+  ══════════════════════════════ */
+  .famosos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .famoso-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FFF8F2;
+    border: 1px solid rgba(244,132,95,0.15);
+    border-radius: 10px;
+    padding: 9px 13px;
+  }
+
+  .famoso-emoji { font-size: 20px; flex-shrink: 0; }
+
+  .famoso-nombre {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--gris-oscuro);
+  }
+
+  .famoso-datos {
+    font-size: 11px;
+    color: var(--gris-medio);
+    margin-top: 1px;
+  }
+
+  .famoso-edad {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--naranja);
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════
+     DÍA MUNDIAL
+  ══════════════════════════════ */
+  .mundial-bloque {
+    background: linear-gradient(135deg, #E3F2FD 0%, #EDE7F6 100%);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(100,149,237,0.2);
+  }
+
+  .mundial-titulo {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: #1565C0;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .mundial-texto {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gris-oscuro);
+    line-height: 1.4;
+  }
+
+  /* ══════════════════════════════
+     RITUAL TAQUERO
+  ══════════════════════════════ */
+  .ritual-bloque {
+    border: 2px dashed rgba(244,132,95,0.45);
+    border-radius: 14px;
+    padding: 16px;
+    background: rgba(255,248,240,0.6);
+  }
+
+  .ritual-titulo {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--naranja);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ritual-texto {
+    font-size: 12.5px;
+    color: var(--gris-medio);
+    line-height: 1.65;
+  }
+
+  /* ══════════════════════════════
+     ECLIPSE
+  ══════════════════════════════ */
+  .eclipse-bloque {
+    background: linear-gradient(135deg, #0D0D1A 0%, #1A1A35 100%);
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    border: 1px solid rgba(244,211,94,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .eclipse-bloque::before {
+    content: '🌒';
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    font-size: 50px;
+    opacity: 0.18;
+  }
+
+  .eclipse-titulo-top {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: #F4D35E;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .eclipse-fecha {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .eclipse-texto {
+    font-size: 12px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+  }
+
+  .eclipse-aviso {
+    margin-top: 10px;
+    background: rgba(244,211,94,0.12);
+    border: 1px solid rgba(244,211,94,0.3);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-size: 11px;
+    color: #F4D35E;
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════
+     BOTONES NAVEGACIÓN
+  ══════════════════════════════ */
+  .nav-botones {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    padding: 18px 28px 24px;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-prev, .btn-next {
+    background: #FFF8F2;
+    color: var(--gris-oscuro);
+    border: 1.5px solid var(--gris-claro);
+    box-shadow: 0 2px 8px rgba(180,90,40,0.08);
+  }
+
+  .btn-prev:hover, .btn-next:hover {
+    background: var(--naranja);
+    color: white;
+    border-color: var(--naranja);
+    box-shadow: 0 4px 16px rgba(244,132,95,0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn-hoy {
+    background: var(--gris-oscuro);
+    color: white;
+    box-shadow: 0 4px 16px rgba(42,42,42,0.25);
+    font-size: 11px;
+    padding: 12px 14px;
+    white-space: nowrap;
+  }
+
+  .btn-hoy:hover {
+    background: var(--naranja);
+    box-shadow: 0 4px 16px rgba(244,132,95,0.4);
+    transform: translateY(-1px);
+  }
+
+  .flecha { font-size: 16px; }
+
+  /* ══════════════════════════════
+     PIE
+  ══════════════════════════════ */
+  .pie {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: rgba(100,80,60,0.5);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE PEQUEÑO
+  ══════════════════════════════ */
+  @media (max-width: 380px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .info-card.full-width { grid-column: auto; }
+    .numero-dia { font-size: 110px; }
+    .nav-botones { padding: 14px 18px 20px; gap: 8px; }
+    .btn { font-size: 11px; padding: 10px 12px; }
+    .seccion { margin-left: 18px; margin-right: 18px; }
+    .cuerpo-fecha { padding: 20px 18px 0; }
+    .badges { padding: 8px 18px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="tarjeta" id="tarjeta">
+
+    <!-- CABECERA -->
+    <div class="cabecera">
+      <div class="cabecera-izq">
+        <div class="perforaciones">
+          <span class="punto punto-rojo"></span>
+          <span class="punto punto-amarillo"></span>
+          <span class="punto punto-verde"></span>
+        </div>
+        <span class="titulo-cal">Calendario El Taco</span>
+      </div>
+      <span class="sello">Edición de Javi TJ</span>
+    </div>
+
+    <!-- CUERPO FECHA -->
+    <div class="cuerpo-fecha">
+      <span class="etiqueta-hoy" id="etiqueta-hoy">Día</span>
+      <div class="numero-dia" id="numero-dia">16</div>
+      <div class="nombre-dia-completo" id="nombre-dia-completo">Lunes</div>
+      <div class="mes-anyo">
+        <span id="mes-texto">MAR</span>
+        <span class="separador"></span>
+        <span id="anyo-texto">2026</span>
+      </div>
+    </div>
+
+    <!-- BADGES -->
+    <div class="badges" id="badges-contenedor"></div>
+
+    <div class="divider"></div>
+
+    <!-- INFO GRID: Luna + Amanecer/Ocaso -->
+    <div class="info-grid">
+      <div class="info-card" id="card-luna">
+        <span class="info-label">🌙 Fase lunar</span>
+        <span class="luna-icon" id="luna-icon">🌕</span>
+        <span class="info-valor" id="luna-nombre">Llena</span>
+        <span class="info-sub" id="luna-desc">Visible toda la noche</span>
+      </div>
+      <div class="info-card">
+        <span class="info-label">☀️ Sol en Llanes</span>
+        <span class="info-valor" id="sol-amanecer">07:42 h</span>
+        <span class="info-sub">Amanecer</span>
+        <span class="info-valor" style="margin-top:6px" id="sol-ocaso">19:18 h</span>
+        <span class="info-sub">Ocaso</span>
+      </div>
+    </div>
+
+    <!-- SANTORAL -->
+    <div class="seccion">
+      <div class="seccion-titulo">✦ Santoral del día</div>
+      <div class="santoral-contenido">
+        <div class="santo-nombre" id="santo-nombre">San Heriberto</div>
+        <div class="santo-desc" id="santo-desc">Obispo y confesor. Patrón de Colonia. Conocido por su caridad y piedad.</div>
+      </div>
+    </div>
+
+    <!-- FRASE DEL DÍA -->
+    <div class="seccion">
+      <div class="seccion-titulo">✦ Frase del día</div>
+      <div class="frase-bloque">
+        <span class="frase-label">Frase del día</span>
+        <div class="frase-texto" id="frase-texto">"El que madruga, coge el mejor taco del día"</div>
+        <span class="frase-autor" id="frase-autor">— Sabiduría Taquera Universal</span>
+      </div>
+    </div>
+
+    <!-- DÍA MUNDIAL -->
+    <div class="seccion">
+      <div class="seccion-titulo">✦ Efemérides del día</div>
+      <div class="mundial-bloque">
+        <span class="mundial-titulo">🌍 Día Mundial</span>
+        <div class="mundial-texto" id="mundial-texto">Cargando...</div>
+      </div>
+    </div>
+
+    <!-- FAMOSOS -->
+    <div class="seccion">
+      <div class="seccion-titulo">✦ Cumplen años hoy</div>
+      <div class="famosos-lista" id="famosos-lista">
+        <div class="famoso-item">
+          <span class="famoso-emoji">🎂</span>
+          <div>
+            <div class="famoso-nombre">Cargando...</div>
+            <div class="famoso-datos"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RITUAL TAQUERO -->
+    <div class="seccion">
+      <div class="seccion-titulo">✦ Ritual Taquero</div>
+      <div class="ritual-bloque">
+        <div class="ritual-titulo">📋 Cómo usar este calendario</div>
+        <div class="ritual-texto">
+          Cada mañana, arranca mentalmente esta hoja del taco, léela con calma y quédate con su esencia. Consulta el santoral para recordar felicitaciones, vigila la luna para tus planes y usa las flechas de abajo para explorar días pasados o futuros. ¡El año 2026 te espera, día a día, taco a taco!
+        </div>
+      </div>
+    </div>
+
+    <!-- ECLIPSE (siempre visible) -->
+    <div class="seccion" id="eclipse-seccion">
+      <div class="seccion-titulo">✦ Eclipse Solar 2026</div>
+      <div class="eclipse-bloque">
+        <span class="eclipse-titulo-top">🌑 Eclipse Total de Sol · Asturias</span>
+        <div class="eclipse-fecha">Miércoles, 12 de agosto de 2026</div>
+        <div class="eclipse-texto">
+          El primer eclipse total de Sol visible desde la Península Ibérica en más de un siglo (desde 1912). Asturias estará íntegramente dentro de la franja de totalidad. La oscuridad total ocurrirá hacia las <strong style="color:rgba(255,255,255,0.9)">20:30 h</strong>, con el Sol muy bajo al oeste. Duración: entre 1'45" y 2 minutos.
+          <br><br>
+          Lugares ideales: <strong style="color:rgba(255,255,255,0.9)">playas y miradores orientados al poniente</strong>, como la costa de Llanes, Cabo Vidio u horizontes abiertos de Oviedo.
+        </div>
+        <div class="eclipse-aviso">⚠️ Nunca mirar directamente al Sol sin gafas homologadas para eclipses.</div>
+      </div>
+    </div>
+
+    <!-- BOTONES NAVEGACIÓN -->
+    <div class="nav-botones">
+      <button class="btn btn-prev" id="btn-prev" onclick="cambiarDia(-1)">
+        <span class="flecha">←</span> Anterior
+      </button>
+      <button class="btn btn-hoy" onclick="volverHoy()">Hoy</button>
+      <button class="btn btn-next" id="btn-next" onclick="cambiarDia(1)">
+        Siguiente <span class="flecha">→</span>
+      </button>
+    </div>
+
+  </div><!-- /tarjeta -->
+
+  <div class="pie">Calendario El Taco · Javi TJ · 2026 · Llanes, Asturias</div>
+
+</div><!-- /wrapper -->
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   DATOS DEL CALENDARIO 2026
+══════════════════════════════════════════════════════════ */
+
+// Fecha actual de inicio
+let fechaActual = new Date();
+fechaActual.setHours(0,0,0,0);
+
+// ─── NOMBRES ──────────────────────────────────────────
+const DIAS_SEMANA = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const MESES = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+const MESES_COMPLETOS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+// ─── FESTIVOS NACIONALES (mes 1-based, día) ───────────
+const FESTIVOS_NAC = {
+  '1-1':  {nombre:'Año Nuevo', icono:'🎆'},
+  '1-6':  {nombre:'Epifanía del Señor', icono:'👑'},
+  '4-2':  {nombre:'Jueves Santo', icono:'✝️'},
+  '4-3':  {nombre:'Viernes Santo', icono:'✝️'},
+  '5-1':  {nombre:'Fiesta del Trabajo', icono:'🔨'},
+  '8-15': {nombre:'Asunción de la Virgen', icono:'🕊️'},
+  '9-8':  {nombre:'Día de Asturias', icono:'🏔️'},
+  '10-12':{nombre:'Fiesta Nacional de España', icono:'🇪🇸'},
+  '11-2': {nombre:'Traslado festivo (1 Nov.)', icono:'🕯️'},
+  '12-7': {nombre:'Traslado festivo (6 Dic.)', icono:'📅'},
+  '12-8': {nombre:'Día de la Inmaculada', icono:'💫'},
+  '12-25':{nombre:'Navidad', icono:'🎄'},
+};
+
+// ─── FESTIVOS LOCALES LLANES ───────────────────────────
+const FESTIVOS_LLANES = {
+  '4-6':  {nombre:'Lunes de Pascua (Llanes)', icono:'🐣'},
+  '7-22': {nombre:'La Magdalena (Llanes)', icono:'⛪'},
+};
+const FESTIVOS_POSADA = {
+  '3-19': {nombre:'San José (Posada)', icono:'🌿'},
+  '7-25': {nombre:'Santiago (Posada)', icono:'⚔️'},
+};
+const FESTIVOS_NUEVA = {
+  '4-23': {nombre:'San Jorge (Nueva/Valle San Jorge)', icono:'🐉'},
+  '9-14': {nombre:'El Cristo (Nueva/Valle San Jorge)', icono:'✝️'},
+};
+
+// ─── FECHAS ESPECIALES ─────────────────────────────────
+const FECHAS_ESPECIALES = {
+  '2-14':  {texto:'💕 Día de San Valentín · Día de los Enamorados', tipo:'amor'},
+  '3-8':   {texto:'♀️ Día Internacional de la Mujer', tipo:'mujer'},
+  '4-1':   {texto:'🃏 Día de los Inocentes (versión española)', tipo:'especial'},
+  '7-18':  {texto:'🌸 Día de Santa Marina · ¡Feliz día a todas las Marinas!', tipo:'especial'},
+  '1-17':  {texto:'🐴 Día de San Antón', tipo:'especial'},
+  '10-31': {texto:'🎃 Halloween · Día de las Brujas', tipo:'especial'},
+  '11-1':  {texto:'🕯️ Día de Todos los Santos', tipo:'especial'},
+  '11-2':  {texto:'💐 Día de los Difuntos', tipo:'especial'},
+};
+
+// ─── ESTACIONES 2026 ───────────────────────────────────
+const ESTACIONES = {
+  '3-20':  {nombre:'🌱 Comienza la Primavera', hora:'15:46 h (hora peninsular)', detalle:'En el hemisferio sur comienza el otoño.'},
+  '6-21':  {nombre:'☀️ Comienza el Verano',    hora:'10:24 h (hora peninsular)', detalle:'El día más largo del año.'},
+  '9-23':  {nombre:'🍂 Comienza el Otoño',     hora:'02:05 h (hora peninsular)', detalle:'Equinoccio de otoño.'},
+  '12-21': {nombre:'❄️ Comienza el Invierno',  hora:'21:50 h (hora peninsular)', detalle:'El día más corto del año.'},
+};
+
+// ─── ECLIPSE ───────────────────────────────────────────
+const ECLIPSE_KEY = '8-12';
+
+// ─── SANTORAL ─────────────────────────────────────────
+const SANTORAL = {
+  '1-1':  {nombre:'La Sagrada Familia', desc:'Solemnidad de María Santísima, Madre de Dios. Año Nuevo.'},
+  '1-2':  {nombre:'Santos Basilio y Gregorio Nacianceno', desc:'Obispos y Doctores de la Iglesia, siglo IV.'},
+  '1-3':  {nombre:'San Daniel', desc:'Profeta bíblico, conocido por el foso de los leones.'},
+  '1-4':  {nombre:'Santa Ángela de Foligno', desc:'Mística franciscana italiana (1248-1309).'},
+  '1-5':  {nombre:'San Eduardo', desc:'Rey de Inglaterra, conocido por su piedad.'},
+  '1-6':  {nombre:'Epifanía del Señor (Reyes Magos)', desc:'Adoración de los Reyes Magos al Niño Jesús.'},
+  '1-7':  {nombre:'San Raimundo de Peñafort', desc:'Sacerdote y jurista catalán (1185-1275).'},
+  '1-8':  {nombre:'San Apolinar', desc:'Primer obispo de Rávena, mártir del siglo I.'},
+  '1-9':  {nombre:'San Adrián de Canterbury', desc:'Abad anglosajón, gran impulsor de la cultura.'},
+  '1-10': {nombre:'San Gonzalo de Amarante', desc:'Fraile dominico portugués (1187-1259).'},
+  '1-11': {nombre:'San Higinio', desc:'Papa y mártir, siglo II.'},
+  '1-12': {nombre:'San Benito Biscop', desc:'Monje anglosajón, fundador de dos monasterios en Northumbria.'},
+  '1-13': {nombre:'San Hilario de Poitiers', desc:'Obispo y Doctor de la Iglesia, "Atanasio de Occidente".'},
+  '1-14': {nombre:'San Félix de Nola', desc:'Sacerdote y mártir del siglo III, muy venerado en la antigüedad.'},
+  '1-15': {nombre:'San Mauro', desc:'Discípulo de San Benito de Nursia.'},
+  '1-16': {nombre:'San Marcelo I', desc:'Papa y mártir, reorganizó la Iglesia de Roma.'},
+  '1-17': {nombre:'San Antón (San Antonio Abad)', desc:'Padre del monacato cristiano. Patrono de los animales y veterinarios. ¡Día de San Antón! 🐴'},
+  '1-18': {nombre:'Santa Prisca', desc:'Mártir romana del siglo I, muy venerada en Roma.'},
+  '1-19': {nombre:'San Canuto', desc:'Rey de Dinamarca, mártir (1043-1086).'},
+  '1-20': {nombre:'San Sebastián', desc:'Mártir romano, patrón de los soldados y atletas.'},
+  '1-21': {nombre:'Santa Inés', desc:'Virgen y mártir romana del siglo III. Patrona de las jóvenes.'},
+  '1-22': {nombre:'San Vicente', desc:'Diácono y mártir de Zaragoza (†304).'},
+  '1-23': {nombre:'San Ildefonso', desc:'Arzobispo de Toledo, gran mariólogo visigótico (607-667).'},
+  '1-24': {nombre:'San Francisco de Sales', desc:'Obispo de Ginebra, Doctor de la Iglesia y patrono de escritores (1567-1622).'},
+  '1-25': {nombre:'Conversión de San Pablo', desc:'Conmemoración de la conversión del apóstol Pablo camino de Damasco.'},
+  '1-26': {nombre:'Santos Timoteo y Tito', desc:'Discípulos predilectos del apóstol Pablo, obispos del siglo I.'},
+  '1-27': {nombre:'Santa Ángela Merici', desc:'Fundadora de las Ursulinas (1474-1540). Patrona de las personas con discapacidad.'},
+  '1-28': {nombre:'Santo Tomás de Aquino', desc:'Doctor Angélico, filósofo y teólogo dominico (1225-1274). Patrón de las universidades.'},
+  '1-29': {nombre:'San Gildas el Sabio', desc:'Monje e historiador bretón del siglo VI.'},
+  '1-30': {nombre:'San Jacinto de Mariscos', desc:'Mártir romano del siglo I.'},
+  '1-31': {nombre:'San Juan Bosco', desc:'Sacerdote italiano, fundador de los Salesianos (1815-1888). Patrono de los jóvenes.'},
+  '2-1':  {nombre:'San Enrique de Ossó', desc:'Sacerdote catalán, fundador de la Compañía de Santa Teresa (1840-1896).'},
+  '2-2':  {nombre:'Presentación del Señor (Candelaria)', desc:'Fiesta de la Purificación de la Virgen María y presentación de Jesús en el Templo.'},
+  '2-3':  {nombre:'San Blas', desc:'Obispo de Sebaste, mártir (†316). Patrono de los médicos de garganta.'},
+  '2-4':  {nombre:'San Gilberto de Sempringham', desc:'Fundador de la Orden Gilbertina, único orden monástico inglés (1083-1189).'},
+  '2-5':  {nombre:'Santa Águeda', desc:'Virgen y mártir siciliana del siglo III. Patrona de las mujeres con cáncer de mama.'},
+  '2-6':  {nombre:'San Pablo Miki y compañeros', desc:'Mártires de Japón crucificados en 1597.'},
+  '2-7':  {nombre:'San Ricardo de Wyche', desc:'Obispo de Chichester, Inglaterra (1197-1253).'},
+  '2-8':  {nombre:'San Jerónimo Emiliani', desc:'Sacerdote veneciano, fundador de los Somascos (1486-1537). Patrono de huérfanos.'},
+  '2-9':  {nombre:'Santa Apolonia', desc:'Mártir de Alejandría (†249). Patrona de los dentistas.'},
+  '2-10': {nombre:'Santa Escolástica', desc:'Hermana gemela de San Benito, fundadora del monacato femenino (480-547).'},
+  '2-11': {nombre:'Nuestra Señora de Lourdes', desc:'Aniversario de las apariciones de la Virgen a Bernadette Soubirous (1858).'},
+  '2-12': {nombre:'San Damián el Gráfico', desc:'Monje carolingio del siglo IX.'},
+  '2-13': {nombre:'San Benigno de Todi', desc:'Mártir italiano, discípulo de San Feliciano.'},
+  '2-14': {nombre:'San Valentín', desc:'Sacerdote romano martirizado en el siglo III. Patrono de los enamorados. 💕'},
+  '2-15': {nombre:'San Claudio de la Colombière', desc:'Jesuita francés, confesor de Santa Margarita María (1641-1682).'},
+  '2-16': {nombre:'Beato Orozio', desc:'Monje benedictino gallego del siglo X.'},
+  '2-17': {nombre:'Los Siete Santos Fundadores de la Orden Servita', desc:'Siete florentinos que fundaron la Orden de los Siervos de María en 1240.'},
+  '2-18': {nombre:'San Simeón', desc:'Obispo de Jerusalén, primo de Jesús, mártir (†107).'},
+  '2-19': {nombre:'San Álvaro de Zamora', desc:'Fraile dominico español, gran misionero (1360-1430).'},
+  '2-20': {nombre:'San Eucario', desc:'Primer obispo de Tréveris, discípulo de San Pedro.'},
+  '2-21': {nombre:'San Pedro Damián', desc:'Cardenal, reformador eclesiástico y Doctor de la Iglesia (1007-1072).'},
+  '2-22': {nombre:'Cátedra de San Pedro Apóstol', desc:'Fiesta que conmemora el inicio del ministerio de Pedro en Roma.'},
+  '2-23': {nombre:'San Policarpo', desc:'Obispo de Esmirna, discípulo directo del apóstol Juan, mártir (69-155).'},
+  '2-24': {nombre:'San Etelberto', desc:'Rey de Kent, primer rey anglosajón en recibir el bautismo.'},
+  '2-25': {nombre:'San Cesáreo de Nazianzo', desc:'Médico y hermano de San Gregorio Nacianceno, siglo IV.'},
+  '2-26': {nombre:'San Porfirio de Gaza', desc:'Obispo de Gaza, destruyó el último gran templo pagano (347-420).'},
+  '2-27': {nombre:'San Gabriel Possenti', desc:'Joven pasionista italiano (1838-1862). Patrono de los jóvenes.'},
+  '2-28': {nombre:'San Román el Melodioso', desc:'Himnógrafo sirio, compositor del Himno Akathistos (490-556).'},
+  '3-1':  {nombre:'San Rosendo', desc:'Obispo de Mondoñedo y fundador del monasterio de Celanova (907-977).'},
+  '3-2':  {nombre:'San Carlos el Bueno', desc:'Conde de Flandes, mártir (1084-1127).'},
+  '3-3':  {nombre:'Santa Catalina Drexel', desc:'Religiosa americana, fundadora de las Hermanas del Santísimo Sacramento (1858-1955).'},
+  '3-4':  {nombre:'San Casimiro', desc:'Príncipe polaco, patrono de Polonia y Lituania (1458-1484).'},
+  '3-5':  {nombre:'San Juan José de la Cruz', desc:'Fraile franciscano napolitano (1654-1734).'},
+  '3-6':  {nombre:'San Columbano el Joven', desc:'Monje irlandés, gran evangelizador de Europa (543-615).'},
+  '3-7':  {nombre:'Santas Perpetua y Felicidad', desc:'Mártires de Cartago (†203). Ejemplo de valentía y fe.'},
+  '3-8':  {nombre:'San Juan de Dios', desc:'Fundador de la Orden Hospitalaria (1495-1550). Patrono de los enfermos y enfermeros. ♀️ Hoy también: Día Internacional de la Mujer.'},
+  '3-9':  {nombre:'Santa Francisca Romana', desc:'Mística y fundadora de las Oblatas de Santa María (1384-1440).'},
+  '3-10': {nombre:'San Macario de Jerusalén', desc:'Obispo de Jerusalén durante el Concilio de Nicea, siglo IV.'},
+  '3-11': {nombre:'San Eulogio de Córdoba', desc:'Sacerdote y mártir cordobés en la España musulmana (810-859).'},
+  '3-12': {nombre:'San Gregorio Magno', desc:'Papa y Doctor de la Iglesia, reorganizador de la liturgia (540-604).'},
+  '3-13': {nombre:'San Rodrigo', desc:'Mártir cordobés, asesinado por su hermano converso al islam (†857).'},
+  '3-14': {nombre:'Santa Matilde', desc:'Reina de Germania, esposa de Enrique I, gran reina caritativa (895-968).'},
+  '3-15': {nombre:'San Raimundo de Fitero', desc:'Abad cisterciense, fundador de la Orden de Calatrava (†1163).'},
+  '3-16': {nombre:'San Heriberto de Colonia', desc:'Arzobispo de Colonia y canciller del Imperio, conocido por su humildad y caridad (970-1021).'},
+  '3-17': {nombre:'San Patricio', desc:'Apóstol de Irlanda, patrono de los irlandeses (390-461). ☘️'},
+  '3-18': {nombre:'San Cirilo de Jerusalén', desc:'Obispo y Doctor de la Iglesia (315-386). Gran catequista.'},
+  '3-19': {nombre:'San José', desc:'Esposo de la Virgen María y padre adoptivo de Jesús. Patrono de la Iglesia universal, de los trabajadores y de los padres de familia. 🌿'},
+  '3-20': {nombre:'San Cuthberto', desc:'Obispo de Lindisfarne, el gran santo del norte de Inglaterra (634-687). 🌱 Hoy entra la Primavera.'},
+  '3-21': {nombre:'Beato Jacques Laval', desc:'Sacerdote francés, apóstol de Mauricio (1803-1864).'},
+  '3-22': {nombre:'San Bienvenido de Osimo', desc:'Obispo franciscano italiano del siglo XIII.'},
+  '3-23': {nombre:'Santa Turibio de Mogrovejo', desc:'Arzobispo de Lima, gran evangelizador de América (1538-1606).'},
+  '3-24': {nombre:'San Óscar (San Anscario)', desc:'Apóstol del Norte, primer obispo de Hamburgo (801-865).'},
+  '3-25': {nombre:'Anunciación del Señor', desc:'Aniversario de la visita del Arcángel Gabriel a la Virgen María.'},
+  '3-26': {nombre:'Santa Brígida de Irlanda', desc:'Abadesa de Kildare, una de las patronas de Irlanda (450-525).'},
+  '3-27': {nombre:'San Ruperto de Salzburgo', desc:'Apóstol de Baviera, fundador del monasterio de San Pedro en Salzburgo (†718).'},
+  '3-28': {nombre:'San Sixto III', desc:'Papa que construyó la basílica de Santa María la Mayor en Roma, siglo V.'},
+  '3-29': {nombre:'San Jonás y San Baraquisio', desc:'Mártires persas del siglo IV.'},
+  '3-30': {nombre:'San Juan Clímaco', desc:'Abad del Monte Sinaí, autor de "La Escala del Paraíso" (525-606).'},
+  '3-31': {nombre:'San Benjamín', desc:'Diácono mártir en Persia (†421).'},
+  '4-1':  {nombre:'San Hugo de Grenoble', desc:'Obispo de Grenoble, colaboró con San Bruno en la fundación de la Gran Cartuja (1053-1132). 🃏 Hoy: Día de los Inocentes.'},
+  '4-2':  {nombre:'San Francisco de Paula', desc:'Ermitaño calabrés, fundador de los Mínimos (1416-1507). Jueves Santo.'},
+  '4-3':  {nombre:'San Benigno de Dijon', desc:'Misionero del siglo II, apóstol de Borgoña. Viernes Santo.'},
+  '4-4':  {nombre:'San Isidoro de Sevilla', desc:'Arzobispo de Sevilla y Doctor de la Iglesia, "el último sabio de la Antigüedad" (560-636).'},
+  '4-5':  {nombre:'San Vicente Ferrer', desc:'Fraile dominico valenciano, gran predicador y taumaturgo (1350-1419).'},
+  '4-6':  {nombre:'Lunes de Pascua (Llanes)', desc:'Festividad local del concejo de Llanes (excepto Posada, Nueva y Valle de San Jorge). 🐣'},
+  '4-7':  {nombre:'San Juan Bautista de la Salle', desc:'Sacerdote francés, fundador de los Hermanos de las Escuelas Cristianas (1651-1719). Patrono de los maestros.'},
+  '4-8':  {nombre:'San Dionisio de Corinto', desc:'Obispo de Corinto, gran escritor eclesiástico del siglo II.'},
+  '4-9':  {nombre:'Santa María de Cleofás', desc:'Discípula de Jesús, presente en su Crucifixión y Resurrección.'},
+  '4-10': {nombre:'San Miguel de los Santos', desc:'Trinitario catalán (1591-1625). Patrono de Vic.'},
+  '4-11': {nombre:'San Estanislao', desc:'Obispo de Cracovia y mártir, patrono de Polonia (1030-1079).'},
+  '4-12': {nombre:'San Zenón de Verona', desc:'Obispo de Verona, primer gran defensor del dogma de la virginidad de María, siglo IV.'},
+  '4-13': {nombre:'San Martín I', desc:'Papa y mártir, murió deportado por el emperador Constante II (649-655).'},
+  '4-14': {nombre:'San Tiburcio', desc:'Mártir romano del siglo III, hermano de San Valeriano.'},
+  '4-15': {nombre:'Santa Berta de Blangy', desc:'Abadesa fundadora del monasterio de Blangy, siglo VII.'},
+  '4-16': {nombre:'Santa Bernardita Soubirous', desc:'Vidente de Lourdes, religiosa (1844-1879). Patrona de los enfermos.'},
+  '4-17': {nombre:'San Aniceto', desc:'Papa y mártir de origen sirio, siglo II.'},
+  '4-18': {nombre:'San Apolonio el Apologista', desc:'Senador romano, gran defensor de la fe cristiana ante el Senado de Roma, siglo II.'},
+  '4-19': {nombre:'San León IX', desc:'Papa reformador, luchó contra la simonía y el nicolaísmo (1002-1054).'},
+  '4-20': {nombre:'San Adalberto de Praga', desc:'Obispo de Praga, misionero y mártir en Polonia (956-997).'},
+  '4-21': {nombre:'San Anselmo de Canterbury', desc:'Arzobispo de Canterbury, Doctor de la Iglesia y padre de la Escolástica (1033-1109).'},
+  '4-22': {nombre:'Beato Iván de Pskov', desc:'Asceta y profeta ruso del siglo XVI.'},
+  '4-23': {nombre:'San Jorge', desc:'Mártir del siglo III, patrono de Inglaterra, Cataluña, Georgia y Aragón. Patrón de caballeros y jinetes. 🐉'},
+  '4-24': {nombre:'San Fidel de Sigmaringa', desc:'Primer mártir de la Propaganda Fide (1578-1622).'},
+  '4-25': {nombre:'San Marcos Evangelista', desc:'Autor del segundo Evangelio, fundador de la Iglesia de Alejandría. Patrono de Venecia. ✍️'},
+  '4-26': {nombre:'San Isidoro Agricultor', desc:'Labrador madrileño, patrono de Madrid y de los agricultores (1080-1172).'},
+  '4-27': {nombre:'San Pedro Canisio', desc:'Jesuita alemán, segundo apóstol de Alemania y Doctor de la Iglesia (1521-1597).'},
+  '4-28': {nombre:'San Pedro Chanel', desc:'Primer mártir de Oceanía, misionero francés (1803-1841).'},
+  '4-29': {nombre:'Santa Catalina de Siena', desc:'Mística dominica, Doctora de la Iglesia y patrona de Italia y Europa (1347-1380). ✒️'},
+  '4-30': {nombre:'San Pío V', desc:'Papa dominico, organizador de la Batalla de Lepanto (1504-1572).'},
+  '5-1':  {nombre:'San José Obrero', desc:'Patrono de los trabajadores. Fiesta del Trabajo. 🔨'},
+  '5-2':  {nombre:'San Atanasio', desc:'Arzobispo de Alejandría, defensor del dogma de la Trinidad, Doctor de la Iglesia (296-373).'},
+  '5-3':  {nombre:'Santos Felipe y Santiago el Menor', desc:'Apóstoles de Jesucristo. ✝️'},
+  '5-4':  {nombre:'Beato Miguel Garicoïts', desc:'Sacerdote vasco, fundador de los Betharramitas (1797-1863).'},
+  '5-5':  {nombre:'San Ángel de Jerusalén', desc:'Carmelita siciliano, mártir (1185-1220).'},
+  '5-6':  {nombre:'San Domingo de la Calzada', desc:'Ermitaño riojano, constructor de caminos y hospitales para peregrinos (1019-1109).'},
+  '5-7':  {nombre:'Beata Gisela de Baviera', desc:'Reina de Hungría, esposa de San Esteban (†1060).'},
+  '5-8':  {nombre:'San Pedro de Tarantasia', desc:'Arzobispo de Tarantasia y Doctor de la Iglesia (1102-1175).'},
+  '5-9':  {nombre:'San Pacomio', desc:'Fundador del cenobitismo oriental, primer gran organizador del monacato (292-346).'},
+  '5-10': {nombre:'San Juan de Ávila', desc:'Sacerdote y Doctor de la Iglesia, "el Apóstol de Andalucía" (1499-1569).'},
+  '5-11': {nombre:'San Mamerto', desc:'Obispo de Vienne, institutor de las Rogativas (†475).'},
+  '5-12': {nombre:'Santos Nereo y Aquileo', desc:'Soldados romanos convertidos al cristianismo, mártires del siglo I.'},
+  '5-13': {nombre:'Nuestra Señora de Fátima', desc:'Aniversario de las apariciones de la Virgen a los pastorcillos en Fátima (1917). 🕊️'},
+  '5-14': {nombre:'San Matías Apóstol', desc:'Apóstol elegido por sorteo para sustituir a Judas Iscariote. ✝️'},
+  '5-15': {nombre:'San Isidoro de Madrid', desc:'Patrón de Madrid y de los agricultores (1080-1172). 🌾'},
+  '5-16': {nombre:'San Simón Stock', desc:'General de la Orden del Carmen al que la Virgen entregó el escapulario (†1265).'},
+  '5-17': {nombre:'San Pascual Baylón', desc:'Fraile franciscano, patrono de los congresos eucarísticos (1540-1592).'},
+  '5-18': {nombre:'San Juan I', desc:'Papa y mártir, murió en prisión por orden de Teodorico el Grande (†526).'},
+  '5-19': {nombre:'San Celestino V', desc:'Papa ermitaño, primer papa en renunciar voluntariamente al papado (1215-1296).'},
+  '5-20': {nombre:'San Bernardino de Siena', desc:'Fraile franciscano, gran predicador del siglo XV (1380-1444).'},
+  '5-21': {nombre:'San Cristóbal Magallanes', desc:'Sacerdote y mártir mexicano (1869-1927). Beatificado por Juan Pablo II.'},
+  '5-22': {nombre:'Santa Rita de Casia', desc:'Monja agustina italiana, patrona de los imposibles (1381-1457). 🌹'},
+  '5-23': {nombre:'San Desiderio de Vienne', desc:'Obispo de Vienne, mártir a manos del rey Teodorico II (580-607).'},
+  '5-24': {nombre:'Nuestra Señora Auxiliadora', desc:'Título mariano promovido por Don Bosco. Patrona de los salesianos.'},
+  '5-25': {nombre:'San Gregorio VII', desc:'Papa reformador, impulsó la reforma gregoriana (1020-1085).'},
+  '5-26': {nombre:'San Felipe Neri', desc:'Sacerdote florentino, fundador del Oratorio, "el apóstol de Roma" (1515-1595). 😄'},
+  '5-27': {nombre:'San Agustín de Canterbury', desc:'Primer arzobispo de Canterbury, evangelizador de Inglaterra (†604).'},
+  '5-28': {nombre:'San Justo de Urgell', desc:'Obispo de Urgell, autor del primer comentario del Cantar de los Cantares en Occidente (†546).'},
+  '5-29': {nombre:'San Maximino de Tréveris', desc:'Obispo de Tréveris, gran defensor de la fe católica contra el arrianismo, siglo IV.'},
+  '5-30': {nombre:'Santa Juana de Arco', desc:'Heroína y mística francesa, patrona de Francia (1412-1431). ⚔️'},
+  '5-31': {nombre:'Visitación de la Virgen María', desc:'Visita de la Virgen María a su prima Santa Isabel.'},
+  '6-1':  {nombre:'San Justino', desc:'Filósofo y mártir, el primer gran apologista cristiano (100-165).'},
+  '6-2':  {nombre:'Santos Marcelino y Pedro', desc:'Exorcista y mártir de Roma, siglo III.'},
+  '6-3':  {nombre:'San Carlos Lwanga y compañeros', desc:'Mártires de Uganda, jóvenes pajes quemados vivos en 1886.'},
+  '6-4':  {nombre:'Santa Saturnina', desc:'Virgen y mártir, siglo III.'},
+  '6-5':  {nombre:'San Bonifacio', desc:'Apóstol de Germania, arzobispo de Maguncia y mártir (672-754). 🌿'},
+  '6-6':  {nombre:'San Norberto', desc:'Arzobispo de Magdeburgo, fundador de los Premostratenses (1080-1134).'},
+  '6-7':  {nombre:'Beato Antonio Gianelli', desc:'Obispo de Bobbio, fundador de los Misioneros de San Alfonso (1789-1846).'},
+  '6-8':  {nombre:'San Guillermo de York', desc:'Arzobispo de York, muy querido por el pueblo (†1154).'},
+  '6-9':  {nombre:'San Efrén de Siria', desc:'Diácono y Doctor de la Iglesia, "la lira del Espíritu Santo" (306-373). 🎶'},
+  '6-10': {nombre:'Beata Diana de Andalo', desc:'Primera beata de la Orden de Predicadores (1201-1236).'},
+  '6-11': {nombre:'San Bernabé Apóstol', desc:'Compañero de San Pablo en su primer viaje misionero. ✝️'},
+  '6-12': {nombre:'San Juan de San Facundo', desc:'Agustino salmantino, predicador de la concordia (1430-1479).'},
+  '6-13': {nombre:'San Antonio de Padua', desc:'Franciscano portugués, Doctor de la Iglesia y uno de los santos más populares (1195-1231). 🌸'},
+  '6-14': {nombre:'San Metodio I de Constantinopla', desc:'Patriarca de Constantinopla, restaurador del culto a las imágenes, siglo IX.'},
+  '6-15': {nombre:'San Vito', desc:'Mártir siciliano del siglo III. Patrono de los actores y bailarines.'},
+  '6-16': {nombre:'San Juan Francisco Regis', desc:'Jesuita francés, gran misionero popular (1597-1640).'},
+  '6-17': {nombre:'San Rainiero de Pisa', desc:'Peregrino y ermitaño italiano, patrono de Pisa (1118-1160).'},
+  '6-18': {nombre:'San Gregorio Barbarigo', desc:'Cardenal veneciano, gran promotor del Concilio de Trento (1625-1697).'},
+  '6-19': {nombre:'San Romualdo', desc:'Fundador de la Congregación Camaldulense (951-1027).'},
+  '6-20': {nombre:'San Silverio', desc:'Papa y mártir, desterrado por la emperatriz Teodora (†537).'},
+  '6-21': {nombre:'San Luis Gonzaga', desc:'Joven jesuita, patrono de la juventud (1568-1591). ☀️ Hoy empieza el Verano.'},
+  '6-22': {nombre:'San Paulino de Nola', desc:'Obispo de Nola, poeta cristiano y gran benefactor de los pobres (355-431).'},
+  '6-23': {nombre:'San José Cafasso', desc:'Sacerdote piamontés, maestro espiritual de Don Bosco (1811-1860).'},
+  '6-24': {nombre:'Natividad de San Juan Bautista', desc:'Precursor de Jesucristo. Una de las fiestas más antiguas del calendario litúrgico. 🔥'},
+  '6-25': {nombre:'San Guillermo de Montevergine', desc:'Ermitaño y fundador de la congregación de Montevergine (1085-1142).'},
+  '6-26': {nombre:'San Josemaría Escrivá', desc:'Sacerdote español, fundador del Opus Dei (1902-1975). ✝️'},
+  '6-27': {nombre:'San Cirilo de Alejandría', desc:'Patriarca de Alejandría, Doctor de la Iglesia, definió el término "Madre de Dios" (376-444).'},
+  '6-28': {nombre:'San Ireneo de Lyon', desc:'Obispo de Lyon, gran teólogo y padre de la Iglesia (140-202).'},
+  '6-29': {nombre:'Santos Pedro y Pablo Apóstoles', desc:'Príncipes de los Apóstoles. Una de las fiestas más importantes del año. ⚓'},
+  '6-30': {nombre:'Los Primeros Mártires de Roma', desc:'Cristianos martirizados por Nerón en el 64, primer gran persecución.'},
+  '7-1':  {nombre:'San Junípero Serra', desc:'Franciscano mallorquín, evangelizador de California (1713-1784).'},
+  '7-2':  {nombre:'Visitación de la Virgen María', desc:'Visita de la Virgen María a su prima Santa Isabel (fiesta trasladada).'},
+  '7-3':  {nombre:'Santo Tomás Apóstol', desc:'El apóstol de la duda, que evangelizó la India. Patrono de arquitectos. ✝️'},
+  '7-4':  {nombre:'Santa Isabel de Portugal', desc:'Reina portuguesa, gran pacificadora y benefactora (1271-1336). 🕊️'},
+  '7-5':  {nombre:'San Antonio María Zaccaria', desc:'Fundador de los Barnabitas (1502-1539).'},
+  '7-6':  {nombre:'Santa María Goretti', desc:'Virgen y mártir italiana, modelo de pureza (1890-1902). Patrona de la juventud.'},
+  '7-7':  {nombre:'Beato Benedetto XI', desc:'Papa dominico, conocido por su mansedumbre (1240-1304).'},
+  '7-8':  {nombre:'San Gregorio Grassi', desc:'Franciscano italiano, mártir de China (1833-1900).'},
+  '7-9':  {nombre:'San Agustín Zhao Rong y compañeros', desc:'120 mártires de China, ejecutados entre 1648 y 1930.'},
+  '7-10': {nombre:'Santa Rufina', desc:'Mártir hispalense del siglo III, patrona de Sevilla junto con su hermana Santa Justa.'},
+  '7-11': {nombre:'San Benito de Nursia', desc:'Padre del monacato occidental, patrón de Europa (480-547). ✝️'},
+  '7-12': {nombre:'Santos Luis y Cecilia', desc:'Mártires de Roma, siglo III.'},
+  '7-13': {nombre:'San Enrique II', desc:'Emperador del Sacro Imperio Romano, gran reformador de la Iglesia (972-1024).'},
+  '7-14': {nombre:'San Francisco Solano', desc:'Franciscano andaluz, "el Santo de América" (1549-1610). 🎻'},
+  '7-15': {nombre:'San Buenaventura', desc:'Cardenal franciscano, Doctor de la Iglesia, "el Doctor Seráfico" (1221-1274). 📖'},
+  '7-16': {nombre:'Nuestra Señora del Carmen', desc:'Patrona de la Marina española y de los marineros. La escapularia. 🌊'},
+  '7-17': {nombre:'San Alejo', desc:'El "hombre de Dios", asceta romano que vivió como mendigo (†417).'},
+  '7-18': {nombre:'Santa Marina de Galicia', desc:'Virgen y mártir gallega del siglo IV. 🌸 ¡Feliz día a todas las Marinas! Muy venerada en Galicia y Asturias.'},
+  '7-19': {nombre:'San Simeón de Antioquía', desc:'Obispo de Antioquía, mártir del siglo V.'},
+  '7-20': {nombre:'San Apolinar de Rávena', desc:'Primer obispo de Rávena, discípulo de San Pedro, mártir.'},
+  '7-21': {nombre:'San Lorenzo de Brindisi', desc:'Capuchino y Doctor de la Iglesia, gran diplomático y predicador (1559-1619).'},
+  '7-22': {nombre:'Santa María Magdalena', desc:'La primera testigo de la Resurrección de Cristo. Discípula fiel. "Apostola apostolorum". 🌺 En Llanes: La Magdalena.'},
+  '7-23': {nombre:'Santa Brígida de Suecia', desc:'Mística sueca, fundadora de la Orden Brigidina, patrona de Europa (1303-1373).'},
+  '7-24': {nombre:'San Francisco Solano', desc:'Patrono de Argentina, Paraguay y Bolivia. Músico y misionero.'},
+  '7-25': {nombre:'Santiago Apóstol', desc:'Apóstol, patrono de España y de los peregrinos. "Santiago y cierra España". ⚔️ En Posada: día grande.'},
+  '7-26': {nombre:'Santos Joaquín y Ana', desc:'Padres de la Virgen María, abuelos de Jesús. Patronos de los abuelos. 👴👵'},
+  '7-27': {nombre:'Beato Tito Brandsma', desc:'Carmelita holandés, mártir en Dachau (1881-1942).'},
+  '7-28': {nombre:'San Nazario y San Celso', desc:'Mártires de Milán del siglo I.'},
+  '7-29': {nombre:'Santa Marta', desc:'Hermana de Lázaro y María, conocida por su hospitalidad hacia Jesús. Patrona de las amas de casa.'},
+  '7-30': {nombre:'San Pedro Crisólogo', desc:'Arzobispo de Rávena, Doctor de la Iglesia (380-450).'},
+  '7-31': {nombre:'San Ignacio de Loyola', desc:'Fundador de la Compañía de Jesús (jesuitas) (1491-1556). Ad maiorem Dei gloriam. ✝️'},
+  '8-1':  {nombre:'San Alfonso María de Ligorio', desc:'Obispo y Doctor de la Iglesia, fundador de los Redentoristas (1696-1787).'},
+  '8-2':  {nombre:'San Eusebio de Vercelli', desc:'Obispo de Vercelli, defensor de la fe nicena contra el arrianismo (†371).'},
+  '8-3':  {nombre:'San Nicodemus', desc:'Escriba fariseo, discípulo secreto de Jesús, ayudó a enterrarlo.'},
+  '8-4':  {nombre:'San Juan María Vianney', desc:'Cura de Ars, patrón de los sacerdotes párrocos (1786-1859). 🙏'},
+  '8-5':  {nombre:'Dedicación de la Basílica de Santa María la Mayor', desc:'Conmemoración de la construcción de la gran basílica romana del siglo V.'},
+  '8-6':  {nombre:'Transfiguración del Señor', desc:'Jesucristo se transfigura ante Pedro, Santiago y Juan en el monte Tabor.'},
+  '8-7':  {nombre:'San Sixto II y compañeros', desc:'Papa y mártir, ejecutado durante la persecución de Valeriano (†258).'},
+  '8-8':  {nombre:'Santo Domingo de Guzmán', desc:'Fundador de la Orden de Predicadores (dominicos) (1170-1221). 🐕'},
+  '8-9':  {nombre:'Santa Teresa Benedicta de la Cruz', desc:'Edith Stein, filósofa, carmelita y mártir en Auschwitz (1891-1942). ✡️'},
+  '8-10': {nombre:'San Lorenzo', desc:'Diácono y mártir romano, "el español de Roma" (†258). Patrono de los cocineros. 🔥'},
+  '8-11': {nombre:'Santa Clara de Asís', desc:'Fundadora de las Clarisas, primera mujer que escribió una Regla religiosa (1194-1253). ✨'},
+  '8-12': {nombre:'Santa Juana Francisca de Chantal', desc:'Fundadora de la Visitación con San Francisco de Sales (1572-1641). 🌑 Hoy: Eclipse Total de Sol en Asturias (≈20:30 h).'},
+  '8-13': {nombre:'Santos Ponciano e Hipólito', desc:'Papa y antipapa, ambos mártires en las minas de Cerdeña (†235).'},
+  '8-14': {nombre:'San Maximiliano Kolbe', desc:'Franciscano polaco, mártir de Auschwitz, entregó su vida por otro preso (1894-1941). 🌹'},
+  '8-15': {nombre:'Asunción de la Virgen María', desc:'La Virgen es llevada en cuerpo y alma al cielo. Solemnidad de precepto. 🕊️'},
+  '8-16': {nombre:'San Roque', desc:'Peregrino de Montpellier, patrono de los enfermos de peste (1295-1327). 🐕'},
+  '8-17': {nombre:'San Jacinto', desc:'Fraile dominico polaco, gran misionero del norte de Europa (1185-1257).'},
+  '8-18': {nombre:'Santa Elena', desc:'Emperatriz romana, madre de Constantino I, encontró la Vera Cruz (248-328).'},
+  '8-19': {nombre:'San Juan Eudes', desc:'Sacerdote normando, fundador de los Eudistas (1601-1680).'},
+  '8-20': {nombre:'San Bernardo de Claraval', desc:'Monje cisterciense, Doctor de la Iglesia, "el último padre de la Iglesia" (1090-1153). 🌿'},
+  '8-21': {nombre:'San Pío X', desc:'Papa, reformador de la liturgia y la música sacra (1835-1914).'},
+  '8-22': {nombre:'Inmaculado Corazón de María', desc:'Devoción al puro y amante corazón de la Virgen María.'},
+  '8-23': {nombre:'Santa Rosa de Lima', desc:'Primera santa de América, patrona de América Latina y Filipinas (1586-1617). 🌹'},
+  '8-24': {nombre:'San Bartolomé Apóstol', desc:'Apóstol de Jesús, evangelizó en la India y Armenia. ✝️'},
+  '8-25': {nombre:'San Luis de Francia', desc:'Rey de Francia, cruzado y gran rey justo (1214-1270). ⚜️'},
+  '8-26': {nombre:'Santa Adelaida de Mons', desc:'Abadesa benedictina flamenca del siglo XI.'},
+  '8-27': {nombre:'Santa Mónica', desc:'Madre de San Agustín, modelo de madre cristiana (331-387). 🙏'},
+  '8-28': {nombre:'San Agustín de Hipona', desc:'Obispo de Hipona, Doctor de la Iglesia, uno de los más influyentes filósofos (354-430). 📖'},
+  '8-29': {nombre:'Martirio de San Juan Bautista', desc:'Degollación del Precursor por orden de Herodes Antipas a instancias de Salomé.'},
+  '8-30': {nombre:'Santa Rosa de Lima', desc:'(Celebración trasladada en algunos países de América Latina).'},
+  '8-31': {nombre:'San Ramón Nonato', desc:'Cardenal mercedario, nacido tras la muerte de su madre, patrono de los partos (1204-1240). 👶'},
+  '9-1':  {nombre:'San Egidio', desc:'Ermitaño provenzal, uno de los Santos Auxiliadores medievales (†710).'},
+  '9-2':  {nombre:'Beato Marcos Križevčanin', desc:'Sacerdote croata, mártir en Hungría (1589-1619).'},
+  '9-3':  {nombre:'San Gregorio Magno', desc:'Papa y Doctor de la Iglesia, reformador de la liturgia y del canto gregoriano (540-604).'},
+  '9-4':  {nombre:'Santa Rosalía', desc:'Eremita siciliana (1130-1160). Patrona de Palermo.'},
+  '9-5':  {nombre:'Santa Teresa de Calcuta', desc:'Fundadora de las Misioneras de la Caridad (1910-1997). Premio Nobel de la Paz. ❤️'},
+  '9-6':  {nombre:'Santa Bega', desc:'Princesa irlandesa, ermitaña en Cumbria, siglo VII.'},
+  '9-7':  {nombre:'Santa Regina', desc:'Virgen y mártir de Alesia (Borgoña), siglo III.'},
+  '9-8':  {nombre:'Natividad de la Virgen María', desc:'Celebración del nacimiento de la Virgen María. 🌸 Hoy también: Día de Asturias. 🏔️'},
+  '9-9':  {nombre:'San Pedro Claver', desc:'Jesuita catalán, "apóstol de los negros", trabajó en defensa de los esclavos en Colombia (1581-1654).'},
+  '9-10': {nombre:'San Nicolás de Tolentino', desc:'Agustino italiano, gran taumaturgo medieval (1245-1305).'},
+  '9-11': {nombre:'San Alipión el Estilita', desc:'Asceta griego que vivió 53 años sobre una columna (522-640).'},
+  '9-12': {nombre:'Santísimo Nombre de María', desc:'Fiesta instaurada en agradecimiento por la victoria en el sitio de Viena (1683).'},
+  '9-13': {nombre:'San Juan Crisóstomo', desc:'Patriarca de Constantinopla, Doctor de la Iglesia, "boca de oro" (347-407). 🗣️'},
+  '9-14': {nombre:'Exaltación de la Santa Cruz', desc:'Fiesta de la Cruz de Cristo, en la que fue crucificado. ✝️ En Nueva: El Cristo.'},
+  '9-15': {nombre:'Nuestra Señora de los Dolores', desc:'Los siete dolores de la Virgen María. Patrona de El Salvador.'},
+  '9-16': {nombre:'San Cornelio y San Cipriano', desc:'Papa y obispo, mártires del siglo III, conocidos por la controversia sobre los lapsi.'},
+  '9-17': {nombre:'San Roberto Belarmino', desc:'Cardenal jesuita, Doctor de la Iglesia, gran apologista (1542-1621).'},
+  '9-18': {nombre:'San José de Cupertino', desc:'Franciscano napolitano, el "santo volador", conocido por sus levitaciones (1603-1663). ✈️'},
+  '9-19': {nombre:'San Jenaro', desc:'Obispo de Benevento, mártir. Famoso por el prodigio de su sangre en Nápoles (†305). 🏺'},
+  '9-20': {nombre:'San Andrés Kim Taegon y compañeros', desc:'Primer sacerdote coreano y mártires de Corea del siglo XIX.'},
+  '9-21': {nombre:'San Mateo Apóstol y Evangelista', desc:'El recaudador de impuestos convertido en apóstol. Patrono de los banqueros y contables. ✍️'},
+  '9-22': {nombre:'San Mauricio y compañeros', desc:'Jefe de la legión tebana, mártir en Suiza con 6.600 soldados (†286).'},
+  '9-23': {nombre:'San Pío de Pietrelcina (Padre Pío)', desc:'Capuchino italiano, el fraile de los estigmas (1887-1968). 🙏 Hoy también: Empieza el Otoño. 🍂'},
+  '9-24': {nombre:'Nuestra Señora de la Merced', desc:'Fundación de la Orden de la Merced para la redención de cautivos (1218).'},
+  '9-25': {nombre:'San Cleofás', desc:'Discípulo de Jesús, uno de los caminantes de Emaús.'},
+  '9-26': {nombre:'Santos Cosme y Damián', desc:'Médicos gemelos, mártires en Siria (†287). Patronos de los médicos y farmacéuticos. ⚕️'},
+  '9-27': {nombre:'San Vicente de Paúl', desc:'Sacerdote gascón, "apóstol de la caridad" y patrono de las obras de caridad (1581-1660). ❤️'},
+  '9-28': {nombre:'San Wenceslao', desc:'Duque de Bohemia, mártir, patrono de la República Checa (907-935).'},
+  '9-29': {nombre:'Santos Miguel, Gabriel y Rafael Arcángeles', desc:'Festividad de los tres arcángeles. San Miguel, jefe de los ejércitos celestiales. ⚔️'},
+  '9-30': {nombre:'San Jerónimo', desc:'Monje y Doctor de la Iglesia, traductor de la Biblia al latín (Vulgata) (347-420). 📜'},
+  '10-1': {nombre:'Santa Teresa del Niño Jesús', desc:'Carmelita francesa, la "Pequeña Flor", Doctora de la Iglesia (1873-1897). 🌹'},
+  '10-2': {nombre:'Santos Ángeles Custodios', desc:'Festividad de los ángeles de la guarda. "El Ángel del Señor". 👼'},
+  '10-3': {nombre:'San Francisco de Borja', desc:'General de los jesuitas, el "príncipe que se hizo fraile" (1510-1572).'},
+  '10-4': {nombre:'San Francisco de Asís', desc:'Fundador de los Franciscanos, patrono de los animales y ecología (1181-1226). 🐦'},
+  '10-5': {nombre:'San Bruno', desc:'Fundador de los Cartujos, el orden más austero (1030-1101).'},
+  '10-6': {nombre:'San Brunón de Wurzburgo', desc:'Obispo y teólogo alemán del siglo XI.'},
+  '10-7': {nombre:'Nuestra Señora del Rosario', desc:'Instaurada en acción de gracias por la victoria de Lepanto (1571). 📿'},
+  '10-8': {nombre:'Santa Pelagia', desc:'Penitente de Antioquía, mujeer de vida alegre convertida, siglo V.'},
+  '10-9': {nombre:'San Dionisio Areopagita', desc:'Obispo de Atenas, primer mártir de París, siglo III.'},
+  '10-10':{nombre:'San Francisco de Borja', desc:'Patrono de Portugal, Grande de España y virrey de Cataluña.'},
+  '10-11':{nombre:'San Juan XXIII', desc:'Papa de la apertura, convocó el Concilio Vaticano II (1881-1963). 🕊️'},
+  '10-12':{nombre:'Nuestra Señora del Pilar', desc:'Patrona de España y de la Hispanidad. Aparición de la Virgen a Santiago en Zaragoza. 🇪🇸'},
+  '10-13':{nombre:'San Eduardo el Confesor', desc:'Rey de Inglaterra, fundador de la abadía de Westminster (1004-1066).'},
+  '10-14':{nombre:'San Calixto I', desc:'Papa y mártir, administrador de las catacumbas que llevan su nombre (†222).'},
+  '10-15':{nombre:'Santa Teresa de Jesús', desc:'Mística abulense, fundadora de las Carmelitas Descalzas y Doctora de la Iglesia (1515-1582). 📖'},
+  '10-16':{nombre:'Santa Margarita María de Alacoque', desc:'Visitandina francesa, impulsora de la devoción al Sagrado Corazón (1647-1690).'},
+  '10-17':{nombre:'San Ignacio de Antioquía', desc:'Obispo de Antioquía, mártir, el primero que usó el término "Iglesia Católica" (35-107).'},
+  '10-18':{nombre:'San Lucas Evangelista', desc:'Autor del tercer Evangelio y los Hechos de los Apóstoles. Médico y artista. Patrono de los médicos. ✍️'},
+  '10-19':{nombre:'San Pedro de Alcántara', desc:'Fraile franciscano, gran reformador y místico (1499-1562).'},
+  '10-20':{nombre:'San Juan de Kanty', desc:'Sacerdote polaco, gran teólogo y filántropo (1390-1473).'},
+  '10-21':{nombre:'Santa Úrsula y compañeras', desc:'Virgen y mártir de Colonia, siglo IV. Patrona de los maestros.'},
+  '10-22':{nombre:'San Juan Pablo II', desc:'Papa polaco, figura central del siglo XX, beatificado y canonizado (1920-2005). 🕊️'},
+  '10-23':{nombre:'San Juan de Capistrano', desc:'Fraile franciscano, predicador y militar, defensor de Europa (1386-1456).'},
+  '10-24':{nombre:'San Antonio María Claret', desc:'Arzobispo de Santiago de Cuba, fundador de los Claretianos (1807-1870). 🕊️'},
+  '10-25':{nombre:'Santas Crisanta y Daría', desc:'Mártires romanos del siglo III.'},
+  '10-26':{nombre:'San Evaristo', desc:'Papa, sucesor de San Clemente I, mártir del siglo II.'},
+  '10-27':{nombre:'San Otterán de Iona', desc:'Monje irlandés, uno de los compañeros de San Columba, siglo VI.'},
+  '10-28':{nombre:'Santos Simón y Judas Tadeo Apóstoles', desc:'Apóstoles que misionaron juntos en Persia. San Judas, patrono de las causas imposibles. ✝️'},
+  '10-29':{nombre:'Beato Contardo Ferrini', desc:'Jurista milanés, el "San Luis Gonzaga universitario" (1859-1902).'},
+  '10-30':{nombre:'San Alfonso Rodríguez', desc:'Hermano jesuita español, portero de la Universidad de Mallorca (1531-1617).'},
+  '10-31':{nombre:'San Wolfgango de Ratisbona', desc:'Obispo reformador de Baviera, siglo X. 🎃 También: Halloween, Día de las Brujas.'},
+  '11-1': {nombre:'Todos los Santos', desc:'Solemnidad de todos los santos conocidos y desconocidos. Día festivo en España. 🕯️'},
+  '11-2': {nombre:'Conmemoración de los Fieles Difuntos', desc:'Día de los Difuntos. Oración y recuerdo de todos los fallecidos. 💐'},
+  '11-3': {nombre:'San Martín de Porres', desc:'Fraile dominico peruano, patrono de la justicia social (1579-1639). ❤️'},
+  '11-4': {nombre:'San Carlos Borromeo', desc:'Cardenal arzobispo de Milán, gran reformador del Concilio de Trento (1538-1584).'},
+  '11-5': {nombre:'San Zacarías e Isabel', desc:'Padres de San Juan Bautista, los primeros en creer en el Mesías.'},
+  '11-6': {nombre:'San Leonardo de Noblac', desc:'Ermitaño francés, patrono de los presos y los que están en dificultades (†559).'},
+  '11-7': {nombre:'San Ernesto de Zwiefalten', desc:'Abad benedictino alemán, mártir en la cruzada (†1148).'},
+  '11-8': {nombre:'San Godofredo de Amiens', desc:'Obispo reformador del norte de Francia, siglo XI-XII.'},
+  '11-9': {nombre:'Dedicación de la Basílica de San Juan de Letrán', desc:'Catedral del papa, "la madre de todas las iglesias".'},
+  '11-10':{nombre:'San León Magno', desc:'Papa y Doctor de la Iglesia, detuvo a Atila ante las puertas de Roma (400-461).'},
+  '11-11':{nombre:'San Martín de Tours', desc:'Obispo de Tours, el soldado que partió su capa con un mendigo (316-397). ❄️'},
+  '11-12':{nombre:'San Josafat', desc:'Arzobispo de Polotsk, primer mártir de la Iglesia Oriental canonizado (1580-1623).'},
+  '11-13':{nombre:'San Leandro de Sevilla', desc:'Arzobispo de Sevilla, convirtió al catolicismo a los visigodos (534-600).'},
+  '11-14':{nombre:'San Gertrude la Grande', desc:'Mística benedictina alemana, "el heraldo del Amor Divino" (1256-1302).'},
+  '11-15':{nombre:'San Alberto Magno', desc:'Obispo dominico, maestro de Santo Tomás de Aquino, Doctor de la Iglesia (1193-1280). 🔬'},
+  '11-16':{nombre:'Santa Margarita de Escocia', desc:'Reina de Escocia, gran benefactora de los pobres y reformadora de la Iglesia (1045-1093).'},
+  '11-17':{nombre:'Santa Isabel de Hungría', desc:'Reina de Hungría, patrona de los pobres y los panaderos (1207-1231). 🍞'},
+  '11-18':{nombre:'Dedicación de las Basílicas de San Pedro y San Pablo', desc:'Conmemoración de la consagración de las dos grandes basílicas romanas.'},
+  '11-19':{nombre:'Santa Matilde de Ringelheim', desc:'Reina de Germania, fundadora de monasterios (895-968).'},
+  '11-20':{nombre:'San Edmundo de Este Anglia', desc:'Rey mártir anglosajón, patrono de la ciudad de Bury St Edmunds (841-869).'},
+  '11-21':{nombre:'Presentación de la Virgen María en el Templo', desc:'Celebración basada en la tradición de que María fue presentada en el Templo de Jerusalén.'},
+  '11-22':{nombre:'Santa Cecilia', desc:'Virgen y mártir romana, patrona de los músicos (†230). 🎵'},
+  '11-23':{nombre:'San Clemente I', desc:'Tercer sucesor de Pedro en la sede de Roma, mártir (†99).'},
+  '11-24':{nombre:'San Andrés Dung-Lac y compañeros', desc:'117 mártires de Vietnam entre los siglos XVII-XIX.'},
+  '11-25':{nombre:'Santa Catalina de Alejandría', desc:'Virgen y mártir del siglo IV, patrona de los filósofos y estudiantes. 🎓'},
+  '11-26':{nombre:'San Leonardo de Puerto Mauricio', desc:'Franciscano italiano, predicador de misiones populares (1676-1751).'},
+  '11-27':{nombre:'Santa Virgen de la Medalla Milagrosa', desc:'Aparición de la Virgen a Santa Catalina Labouré en París (1830).'},
+  '11-28':{nombre:'San Jacobo de la Marca', desc:'Franciscano italiano, misionero y reformador (1394-1476).'},
+  '11-29':{nombre:'Beato Francesc de Castelló Aleu', desc:'Mártir español de la Guerra Civil (1907-1936).'},
+  '11-30':{nombre:'San Andrés Apóstol', desc:'Hermano de Simón Pedro, el primer apóstol llamado por Jesús. Patrono de Escocia, Rusia y Grecia. ✝️'},
+  '12-1': {nombre:'San Eligio', desc:'Orfebre y obispo de Noyon, patrono de los metalúrgicos (588-660). ⚒️'},
+  '12-2': {nombre:'Santa Bibiana', desc:'Virgen y mártir romana del siglo IV, cuya basílica está en Roma.'},
+  '12-3': {nombre:'San Francisco Javier', desc:'Jesuita navarro, "el apóstol de Oriente" (1506-1552). Patrono de las misiones. ✈️'},
+  '12-4': {nombre:'Santa Bárbara', desc:'Virgen y mártir del siglo III. Patrona de artilleros y mineros. ⚡'},
+  '12-5': {nombre:'San Sabas', desc:'Fundador de la Gran Laura en Palestina, padre del monacato palestino (439-532).'},
+  '12-6': {nombre:'San Nicolás', desc:'Obispo de Mira, "el tío de los niños", inspiración para Santa Claus (270-343). 🎅'},
+  '12-7': {nombre:'San Ambrosio', desc:'Obispo de Milán, Doctor de la Iglesia, bautizó a San Agustín (339-397). 🐝'},
+  '12-8': {nombre:'Inmaculada Concepción', desc:'La Virgen María concebida sin pecado original. Dogma definido en 1854. 💫'},
+  '12-9': {nombre:'San Juan Diego', desc:'Indígena mexicano, vidente de Guadalupe (1474-1548). 🌹'},
+  '12-10':{nombre:'Nuestra Señora de Loreto', desc:'La Santa Casa de Nazaret transportada milagrosamente a Loreto (Italia).'},
+  '12-11':{nombre:'San Dámaso I', desc:'Papa español de origen portugués, encargó a San Jerónimo la traducción de la Biblia (305-384).'},
+  '12-12':{nombre:'Nuestra Señora de Guadalupe', desc:'Patrona de México y América Latina. Aparición a Juan Diego en 1531. 🌹'},
+  '12-13':{nombre:'Santa Lucía', desc:'Virgen y mártir siciliana del siglo III. Patrona de los enfermos de la vista. 🕯️'},
+  '12-14':{nombre:'San Juan de la Cruz', desc:'Carmelita descalzo, Doctor de la Iglesia, el gran poeta místico español (1542-1591). 🌙'},
+  '12-15':{nombre:'San Valeriano', desc:'Mártir de Abitunia en el norte de África (†304).'},
+  '12-16':{nombre:'Santa Adelaida de Italia', desc:'Emperatriz del Sacro Imperio, gran reina caritativa (931-999).'},
+  '12-17':{nombre:'San Lázaro', desc:'El amigo de Jesús resucitado de entre los muertos. Patrono de los leprosos. ✝️'},
+  '12-18':{nombre:'San Rufus', desc:'Hijo de Simón de Cirene, que ayudó a Jesús a llevar la cruz, siglo I.'},
+  '12-19':{nombre:'San Timoteo de Antioquía', desc:'Mártir sirio del siglo VI.'},
+  '12-20':{nombre:'San Domingo de Silos', desc:'Abad benedictino riojano, gran figura monástica (1000-1073).'},
+  '12-21':{nombre:'San Pedro Canisio', desc:'Jesuita, Doctor de la Iglesia. ❄️ Hoy también: Empieza el Invierno.'},
+  '12-22':{nombre:'Santa Francisca de Chantal', desc:'Cofundadora de la Visitación con San Francisco de Sales.'},
+  '12-23':{nombre:'San Juan de Kety', desc:'Sacerdote y teólogo polaco, gran benefactor de los pobres (1390-1473).'},
+  '12-24':{nombre:'Nochebuena', desc:'Víspera de Navidad. Los pastores visitan al Niño Jesús. 🌟'},
+  '12-25':{nombre:'Natividad del Señor', desc:'¡Feliz Navidad! Nacimiento de Jesucristo. Solemnidad de precepto. 🎄'},
+  '12-26':{nombre:'San Esteban, Primer Mártir', desc:'El primer mártir cristiano, lapidado por su fe en Jerusalén. ✝️'},
+  '12-27':{nombre:'San Juan Evangelista', desc:'El "discípulo amado", autor del cuarto Evangelio y del Apocalipsis. ✍️'},
+  '12-28':{nombre:'Santos Inocentes', desc:'Los niños masacrados por Herodes buscando al Niño Jesús. Los "primeros mártires". 👼'},
+  '12-29':{nombre:'Santo Tomás Becket', desc:'Arzobispo de Canterbury, asesinado en su catedral (1118-1170). ✝️'},
+  '12-30':{nombre:'La Sagrada Familia', desc:'Fiesta de Jesús, María y José como modelo de familia cristiana. 👨‍👩‍👧'},
+  '12-31':{nombre:'San Silvestre I', desc:'Papa durante la época de Constantino el Grande (†335). ¡Fin de año! 🥂'},
+};
+
+// ─── DÍAS MUNDIALES ───────────────────────────────────
+const DIAS_MUNDIALES = {
+  '1-1':  '🌍 Año Nuevo · Día de la Paz Mundial',
+  '1-4':  '📖 Día Mundial del Braille',
+  '1-11': '🙏 Día Internacional del Trabajo del Niño',
+  '1-24': '📚 Día Internacional de la Educación',
+  '2-2':  '💧 Día Mundial de los Humedales',
+  '2-4':  '🎗️ Día Mundial contra el Cáncer',
+  '2-11': '🔬 Día Internacional de la Mujer y la Niña en la Ciencia',
+  '2-13': '📻 Día Mundial de la Radio',
+  '2-20': '🤝 Día Mundial de la Justicia Social',
+  '2-21': '🗣️ Día Internacional de la Lengua Materna',
+  '3-3':  '🌿 Día Mundial de la Vida Silvestre',
+  '3-8':  '♀️ Día Internacional de la Mujer',
+  '3-14': '🥧 Día del Número Pi (3.14)',
+  '3-20': '😊 Día Internacional de la Felicidad · Día Mundial de los Gorriones',
+  '3-21': '🌸 Día Mundial de la Poesía · Día Internacional de la Eliminación de la Discriminación Racial',
+  '3-22': '💧 Día Mundial del Agua',
+  '3-23': '🌤️ Día Meteorológico Mundial',
+  '3-25': '🎭 Día Mundial del Teatro (conmemoración previa)',
+  '4-2':  '📖 Día Internacional del Libro Infantil',
+  '4-7':  '🏥 Día Mundial de la Salud',
+  '4-22': '🌍 Día de la Tierra',
+  '4-23': '📚 Día del Libro y del Derecho de Autor',
+  '5-3':  '📰 Día Mundial de la Libertad de Prensa',
+  '5-15': '👨‍👩‍👧 Día Internacional de la Familia',
+  '5-17': '📡 Día Mundial de las Telecomunicaciones',
+  '5-31': '🚭 Día Mundial sin Tabaco',
+  '6-1':  '👶 Día Internacional del Niño',
+  '6-5':  '🌿 Día Mundial del Medio Ambiente',
+  '6-8':  '🌊 Día Mundial de los Océanos',
+  '6-15': '👴 Día Mundial de la Toma de Conciencia del Abuso y Maltrato en la Vejez',
+  '6-21': '🎵 Día Mundial de la Música (Fête de la Musique)',
+  '7-11': '👥 Día Mundial de la Población',
+  '7-18': '🕊️ Día Nelson Mandela',
+  '7-26': '♿ Día Internacional en Apoyo de las Víctimas de la Tortura',
+  '8-9':  '🌏 Día Internacional de los Pueblos Indígenas',
+  '8-12': '👦 Día Internacional de la Juventud · 🌑 Eclipse Total de Sol en Asturias (≈20:30 h)',
+  '9-5':  '❤️ Día Internacional de la Caridad (Teresa de Calcuta)',
+  '9-16': '🌐 Día Internacional de la Preservación de la Capa de Ozono',
+  '9-21': '🕊️ Día Internacional de la Paz',
+  '10-1': '👴👵 Día Internacional de las Personas Mayores',
+  '10-4': '🐾 Día Mundial de los Animales',
+  '10-10':'🧠 Día Mundial de la Salud Mental',
+  '10-15':'✋ Día Mundial del Lavado de Manos',
+  '10-16':'🍞 Día Mundial de la Alimentación',
+  '11-19':'🚽 Día Mundial del Retrete',
+  '12-1': '🎗️ Día Mundial del SIDA',
+  '12-3': '♿ Día Internacional de las Personas con Discapacidad',
+  '12-10':'📜 Día de los Derechos Humanos',
+};
+
+// ─── FRASES DEL DÍA ────────────────────────────────────
+const FRASES = [
+  {frase:'"La vida sin tacos es posible, pero sin sentido."', autor:'— Filosofía de barrio'},
+  {frase:'"Cada día es un taco en blanco: ponle lo mejor de ti."', autor:'— Sabiduría Taquera Universal'},
+  {frase:'"El que espera, desespera; pero el que actúa, almuerza."', autor:'— Refrán popular renovado'},
+  {frase:'"No hay problema tan grande que un buen descanso no empequeñezca."', autor:'— Confucio (adaptado)'},
+  {frase:'"Ríe hoy, porque ayer ya pasó y mañana no ha llegado."', autor:'— El Taco Filosófico'},
+  {frase:'"La constancia es la virtud de los que no tienen otro talento."', autor:'— Oscar Wilde'},
+  {frase:'"Haz de cada día tu obra maestra."', autor:'— John Wooden'},
+  {frase:'"El secreto del éxito es comenzar."', autor:'— Mark Twain'},
+  {frase:'"Sé el cambio que quieres ver en el mundo."', autor:'— Mahatma Gandhi'},
+  {frase:'"No cuentes los días; haz que los días cuenten."', autor:'— Muhammad Ali'},
+  {frase:'"La vida es lo que ocurre mientras haces planes."', autor:'— John Lennon'},
+  {frase:'"Un taco al día, mantiene al médico en lejanía."', autor:'— Proverbio Taquero'},
+  {frase:'"Quien mucho abarca, poco aprieta, pero quien bien taquea, todo lo completa."', autor:'— El Taco Refranero'},
+  {frase:'"El éxito es la suma de pequeños esfuerzos repetidos día tras día."', autor:'— Robert Collier'},
+  {frase:'"Vive cada día como si fuera el primero y aprende como si fuera el último."', autor:'— El Calendario del Taco'},
+  {frase:'"La mejor hora para plantar un árbol fue hace veinte años. La segunda mejor hora es ahora."', autor:'— Proverbio chino'},
+  {frase:'"Cae siete veces, levántate ocho."', autor:'— Proverbio japonés'},
+  {frase:'"El camino de mil millas comienza con un solo paso."', autor:'— Lao-Tse'},
+  {frase:'"No es que seamos valientes; es que no nos queda otra."', autor:'— Javi TJ (en voz baja)'},
+  {frase:'"Cuando no sepas qué hacer, ve al mar. Siempre responde."', autor:'— Costero asturiano anónimo'},
+  {frase:'"En Llanes, hasta las piedras tienen historia."', autor:'— Javi TJ, Edición Especial'},
+  {frase:'"Un mal día en Llanes sigue siendo un buen día."', autor:'— Sentencia del Cantábrico'},
+  {frase:'"El que no madruga en Asturias, se pierde el amanecer más verde del mundo."', autor:'— Proverbio del Norte'},
+  {frase:'"La lluvia en Asturias no moja: acaricia."', autor:'— El Paraguas Empapado'},
+  {frase:'"Haz el bien sin mirar a quién, pero no dejes de mirarlo."', autor:'— El Taco Irónico'},
+  {frase:'"Hay tres cosas que nunca vuelven: el tiempo perdido, la flecha lanzada y la palabra dicha."', autor:'— Proverbio árabe'},
+  {frase:'"El optimista ve oportunidades en cada dificultad; el pesimista ve dificultades en cada oportunidad."', autor:'— Winston Churchill'},
+  {frase:'"No busques la perfección, busca el progreso."', autor:'— Taco Motivacional n.º 1'},
+  {frase:'"Si quieres ir rápido, ve solo. Si quieres llegar lejos, ve acompañado."', autor:'— Proverbio africano'},
+  {frase:'"La risa es el sol que ahuyenta el invierno del rostro humano."', autor:'— Victor Hugo'},
+  {frase:'"Uno no se hace viejo: o se oxida o se pule."', autor:'— Machado (parafraseado)'},
+  {frase:'"El que tiene un por qué para vivir, puede soportar casi cualquier cómo."', autor:'— Nietzsche'},
+];
+
+// ─── FAMOSOS POR DÍA ──────────────────────────────────
+const FAMOSOS = {
+  '1-1':  [{emoji:'🎭',nombre:'J.D. Salinger',datos:'Escritor estadounidense (El guardián entre el centeno)',nacimiento:1919},{emoji:'🎵',nombre:'Pat Metheny',datos:'Guitarrista de jazz estadounidense',nacimiento:1954}],
+  '1-2':  [{emoji:'🔬',nombre:'Isaac Asimov',datos:'Escritor y bioquímico ruso-estadounidense',nacimiento:1920},{emoji:'🎬',nombre:'Cuba Gooding Jr.',datos:'Actor estadounidense (Jerry Maguire)',nacimiento:1968}],
+  '1-3':  [{emoji:'✍️',nombre:'J.R.R. Tolkien',datos:'Escritor y filólogo inglés (El Señor de los Anillos)',nacimiento:1892},{emoji:'🎬',nombre:'Mel Gibson',datos:'Actor y director australiano-estadounidense',nacimiento:1956}],
+  '1-4':  [{emoji:'🎬',nombre:'Michael Stipe',datos:'Cantante de R.E.M.',nacimiento:1960}],
+  '1-5':  [{emoji:'🎵',nombre:'Marilyn Manson',datos:'Músico y artista estadounidense',nacimiento:1969}],
+  '1-6':  [{emoji:'🎨',nombre:'Gustave Doré',datos:'Artista e ilustrador francés',nacimiento:1832},{emoji:'🎬',nombre:'Rowan Atkinson',datos:'Actor y comediante inglés (Mr. Bean)',nacimiento:1955}],
+  '1-7':  [{emoji:'🎵',nombre:'David Bowie',datos:'Músico y actor inglés (†2016)',nacimiento:1947},{emoji:'🎬',nombre:'Nicolas Cage',datos:'Actor estadounidense',nacimiento:1964}],
+  '1-8':  [{emoji:'🎵',nombre:'Elvis Presley',datos:'"El Rey del Rock and Roll" (†1977)',nacimiento:1935},{emoji:'🎵',nombre:'David Bowie',datos:'Músico y actor inglés (†2016)',nacimiento:1947}],
+  '1-9':  [{emoji:'⚽',nombre:'Crystal Dunn',datos:'Futbolista estadounidense',nacimiento:1992}],
+  '1-10': [{emoji:'🎬',nombre:'Rod Stewart',datos:'Músico británico',nacimiento:1945}],
+  '1-11': [{emoji:'🎨',nombre:'Ezra Cornell',datos:'Fundador de Cornell University',nacimiento:1807}],
+  '1-12': [{emoji:'🎵',nombre:'Nicki Minaj',datos:'Cantante y rapera trinitense-estadounidense',nacimiento:1982},{emoji:'🎬',nombre:'Jeff Bezos',datos:'Fundador de Amazon',nacimiento:1964}],
+  '1-13': [{emoji:'🎵',nombre:'Orlando Bloom',datos:'Actor inglés (El Señor de los Anillos)',nacimiento:1977}],
+  '1-14': [{emoji:'🎵',nombre:'Dave Grohl',datos:'Músico estadounidense, fundador de Foo Fighters',nacimiento:1969}],
+  '1-15': [{emoji:'✊',nombre:'Martin Luther King Jr.',datos:'Líder de los derechos civiles estadounidense (†1968)',nacimiento:1929}],
+  '1-16': [{emoji:'🎬',nombre:'Kate Moss',datos:'Modelo británica',nacimiento:1974}],
+  '1-17': [{emoji:'🇺🇸',nombre:'Benjamin Franklin',datos:'Político, inventor y escritor estadounidense (†1790)',nacimiento:1706},{emoji:'🎨',nombre:'Jim Carrey',datos:'Actor y comediante canadiense-estadounidense',nacimiento:1962}],
+  '1-18': [{emoji:'🎵',nombre:'Kevin Costner',datos:'Actor y director estadounidense',nacimiento:1955}],
+  '1-19': [{emoji:'🎨',nombre:'Cézanne',datos:'Pintor postimpresionista francés (†1906)',nacimiento:1839}],
+  '1-20': [{emoji:'🎵',nombre:'Ozzy Osbourne',datos:'Músico inglés, vocalista de Black Sabbath',nacimiento:1948}],
+  '1-21': [{emoji:'🎬',nombre:'Geena Davis',datos:'Actriz estadounidense',nacimiento:1956}],
+  '1-22': [{emoji:'🎵',nombre:'Balvin',datos:'Cantante colombiano de reggaetón',nacimiento:1985}],
+  '1-23': [{emoji:'🎵',nombre:'Princess Nokia',datos:'Rapera y artista estadounidense',nacimiento:1992}],
+  '1-24': [{emoji:'🎬',nombre:'Neil Diamond',datos:'Cantante y compositor estadounidense',nacimiento:1941}],
+  '1-25': [{emoji:'🎨',nombre:'Virginia Woolf',datos:'Escritora inglesa (†1941)',nacimiento:1882}],
+  '1-26': [{emoji:'🎵',nombre:'Ellen DeGeneres',datos:'Presentadora y comediante estadounidense',nacimiento:1958}],
+  '1-27': [{emoji:'🎵',nombre:'Mozart',datos:'Compositor austríaco (†1791)',nacimiento:1756},{emoji:'🎬',nombre:'Mia Farrow',datos:'Actriz estadounidense',nacimiento:1945}],
+  '1-28': [{emoji:'🎵',nombre:'Nick Carter',datos:'Cantante de Backstreet Boys',nacimiento:1980}],
+  '1-29': [{emoji:'🎵',nombre:'Oprah Winfrey',datos:'Presentadora y filántropa estadounidense',nacimiento:1954}],
+  '1-30': [{emoji:'🎬',nombre:'Christian Bale',datos:'Actor inglés (Batman, El maquinista)',nacimiento:1974}],
+  '1-31': [{emoji:'⚽',nombre:'Enrique Iglesias',datos:'Cantante español',nacimiento:1975},{emoji:'🎵',nombre:'Justin Timberlake',datos:'Cantante y actor estadounidense',nacimiento:1981}],
+  '2-1':  [{emoji:'🎵',nombre:'Harry Styles',datos:'Cantante inglés, ex One Direction',nacimiento:1994}],
+  '2-2':  [{emoji:'🎨',nombre:'James Joyce',datos:'Escritor irlandés (Ulises, †1941)',nacimiento:1882}],
+  '2-3':  [{emoji:'🎵',nombre:'Isla Fisher',datos:'Actriz australiana',nacimiento:1976}],
+  '2-4':  [{emoji:'🔬',nombre:'Mark Zuckerberg',datos:'Cofundador de Facebook/Meta',nacimiento:1984}],
+  '2-5':  [{emoji:'🎵',nombre:'Cristiano Ronaldo',datos:'Futbolista portugués, CR7',nacimiento:1985},{emoji:'🎬',nombre:'Jennifer Jason Leigh',datos:'Actriz estadounidense',nacimiento:1962}],
+  '2-6':  [{emoji:'🎵',nombre:'Bob Marley',datos:'Músico jamaicano, icono del reggae (†1981)',nacimiento:1945}],
+  '2-7':  [{emoji:'✍️',nombre:'Charles Dickens',datos:'Escritor inglés (Oliver Twist, †1870)',nacimiento:1812}],
+  '2-8':  [{emoji:'🎬',nombre:'James Dean',datos:'Actor estadounidense (†1955)',nacimiento:1931}],
+  '2-9':  [{emoji:'🎵',nombre:'Mia Khalifa',datos:'Personalidad mediática libanesa-estadounidense',nacimiento:1993}],
+  '2-10': [{emoji:'🎵',nombre:'Roberto Carlos',datos:'Cantante y futbolista brasileño',nacimiento:1941}],
+  '2-11': [{emoji:'🔬',nombre:'Thomas Edison',datos:'Inventor estadounidense (†1931)',nacimiento:1847}],
+  '2-12': [{emoji:'🔬',nombre:'Charles Darwin',datos:'Naturalista y biólogo inglés (†1882)',nacimiento:1809},{emoji:'🇺🇸',nombre:'Abraham Lincoln',datos:'16.º Presidente de EE.UU. (†1865)',nacimiento:1809}],
+  '2-13': [{emoji:'🎬',nombre:'Robbie Williams',datos:'Cantante inglés',nacimiento:1974}],
+  '2-14': [{emoji:'🎵',nombre:'Freddie Mercury',datos:'Vocalista de Queen (†1991)',nacimiento:1946}],
+  '2-15': [{emoji:'🔬',nombre:'Galileo Galilei',datos:'Astrónomo y físico italiano (†1642)',nacimiento:1564}],
+  '2-16': [{emoji:'🎵',nombre:'Ice-T',datos:'Rapero y actor estadounidense',nacimiento:1958}],
+  '2-17': [{emoji:'🎬',nombre:'Paris Hilton',datos:'Socialité y empresaria estadounidense',nacimiento:1981}],
+  '2-18': [{emoji:'✍️',nombre:'Toni Morrison',datos:'Escritora estadounidense, Premio Nobel (†2019)',nacimiento:1931}],
+  '2-19': [{emoji:'🎵',nombre:'Seal',datos:'Cantante británico',nacimiento:1963}],
+  '2-20': [{emoji:'🎵',nombre:'Rihanna',datos:'Cantante y empresaria de Barbados',nacimiento:1988}],
+  '2-21': [{emoji:'🎬',nombre:'Alan Rickman',datos:'Actor inglés (Snape en Harry Potter, †2016)',nacimiento:1946}],
+  '2-22': [{emoji:'🇺🇸',nombre:'George Washington',datos:'1.er Presidente de EE.UU. (†1799)',nacimiento:1732}],
+  '2-23': [{emoji:'🎵',nombre:'Sylvia Plath',datos:'Poeta y escritora estadounidense (†1963)',nacimiento:1932}],
+  '2-24': [{emoji:'🎬',nombre:'Steve Jobs',datos:'Cofundador de Apple (†2011)',nacimiento:1955}],
+  '2-25': [{emoji:'🎵',nombre:'George Harrison',datos:'Guitarrista de los Beatles (†2001)',nacimiento:1943}],
+  '2-26': [{emoji:'🎨',nombre:'Victor Hugo',datos:'Escritor francés (Los Miserables, †1885)',nacimiento:1802}],
+  '2-27': [{emoji:'🎵',nombre:'Zuzanna Szadkowski',datos:'Actriz polaca-estadounidense',nacimiento:1982}],
+  '2-28': [{emoji:'🎬',nombre:'Bernadette Peters',datos:'Actriz y cantante estadounidense',nacimiento:1948}],
+  '3-1':  [{emoji:'🎵',nombre:'Justin Bieber',datos:'Cantante canadiense',nacimiento:1994}],
+  '3-2':  [{emoji:'✍️',nombre:'Dr. Seuss',datos:'Escritor e ilustrador estadounidense (†1991)',nacimiento:1904}],
+  '3-3':  [{emoji:'🎵',nombre:'Camila Cabello',datos:'Cantante cubana-estadounidense',nacimiento:1997}],
+  '3-4':  [{emoji:'🎬',nombre:'Demi Moore',datos:'Actriz estadounidense (Ghost)',nacimiento:1962}],
+  '3-5':  [{emoji:'🎵',nombre:'Eva Mendes',datos:'Actriz y modelo estadounidense',nacimiento:1974}],
+  '3-6':  [{emoji:'🎵',nombre:'Michelangelo Buonarroti',datos:'Pintor, escultor y arquitecto italiano (†1564)',nacimiento:1475}],
+  '3-7':  [{emoji:'🎵',nombre:'Rachel Weisz',datos:'Actriz inglesa, Premio Oscar',nacimiento:1970}],
+  '3-8':  [{emoji:'🎬',nombre:'Micky Dolenz',datos:'Cantante de The Monkees',nacimiento:1945}],
+  '3-9':  [{emoji:'🎵',nombre:'Juliette Binoche',datos:'Actriz francesa',nacimiento:1964}],
+  '3-10': [{emoji:'🎵',nombre:'Sharon Stone',datos:'Actriz estadounidense',nacimiento:1958}],
+  '3-11': [{emoji:'🎵',nombre:'Rupert Murdoch',datos:'Magnate de los medios australiano-estadounidense',nacimiento:1931}],
+  '3-12': [{emoji:'🎵',nombre:'Liza Minnelli',datos:'Actriz y cantante estadounidense',nacimiento:1946}],
+  '3-13': [{emoji:'🎬',nombre:'Emile Hirsch',datos:'Actor estadounidense',nacimiento:1985}],
+  '3-14': [{emoji:'🔬',nombre:'Albert Einstein',datos:'Físico teórico alemán (Relatividad, †1955)',nacimiento:1879},{emoji:'🎬',nombre:'Billy Crystal',datos:'Actor y comediante estadounidense',nacimiento:1948}],
+  '3-15': [{emoji:'🎵',nombre:'Eva Longoria',datos:'Actriz y productora estadounidense (Desperate Housewives)',nacimiento:1975}],
+  '3-16': [{emoji:'🎬',nombre:'Isabelle Huppert',datos:'Actriz francesa, una de las más premiadas de Europa',nacimiento:1953},{emoji:'🎵',nombre:'Lauren Graham',datos:'Actriz estadounidense (Gilmore Girls)',nacimiento:1967}],
+  '3-17': [{emoji:'🎵',nombre:'Kurt Russell',datos:'Actor estadounidense',nacimiento:1951}],
+  '3-18': [{emoji:'🎵',nombre:'Queen Latifah',datos:'Rapera y actriz estadounidense',nacimiento:1970}],
+  '3-19': [{emoji:'🎵',nombre:'Bruce Willis',datos:'Actor estadounidense (Die Hard)',nacimiento:1955}],
+  '3-20': [{emoji:'🎵',nombre:'Holly Hunter',datos:'Actriz estadounidense, Premio Oscar',nacimiento:1958}],
+  '3-21': [{emoji:'🎵',nombre:'Ronaldinho',datos:'Futbolista brasileño, Balón de Oro 2005',nacimiento:1980}],
+  '3-22': [{emoji:'🎵',nombre:'Reese Witherspoon',datos:'Actriz y productora estadounidense, Premio Oscar',nacimiento:1976}],
+  '3-23': [{emoji:'🎬',nombre:'Kylie Minogue',datos:'Cantante y actriz australiana',nacimiento:1968}],
+  '3-24': [{emoji:'🎵',nombre:'Peyton Manning',datos:'Exjugador de fútbol americano',nacimiento:1976}],
+  '3-25': [{emoji:'🎵',nombre:'Elton John',datos:'Cantante y compositor inglés',nacimiento:1947}],
+  '3-26': [{emoji:'🎵',nombre:'Keira Knightley',datos:'Actriz inglesa (Piratas del Caribe)',nacimiento:1985}],
+  '3-27': [{emoji:'🎬',nombre:'Fergie',datos:'Cantante estadounidense, Black Eyed Peas',nacimiento:1975}],
+  '3-28': [{emoji:'🎵',nombre:'Lady Gaga',datos:'Cantante y actriz estadounidense',nacimiento:1986}],
+  '3-29': [{emoji:'🎵',nombre:'Brendan Fraser',datos:'Actor canadiense-estadounidense',nacimiento:1968}],
+  '3-30': [{emoji:'🎨',nombre:'Vincent van Gogh',datos:'Pintor postimpresionista neerlandés (†1890)',nacimiento:1853},{emoji:'🎵',nombre:'Celine Dion',datos:'Cantante canadiense',nacimiento:1968}],
+  '3-31': [{emoji:'🎵',nombre:'Ewan McGregor',datos:'Actor escocés (Obi-Wan Kenobi)',nacimiento:1971}],
+  '4-1':  [{emoji:'🎵',nombre:'Susan Boyle',datos:'Cantante escocesa (Britain\'s Got Talent)',nacimiento:1961}],
+  '4-2':  [{emoji:'✍️',nombre:'Hans Christian Andersen',datos:'Escritor danés, padre de los cuentos de hadas (†1875)',nacimiento:1805}],
+  '4-3':  [{emoji:'🎵',nombre:'Marlon Brando',datos:'Actor estadounidense (El Padrino, †2004)',nacimiento:1924}],
+  '4-4':  [{emoji:'🎵',nombre:'Robert Downey Jr.',datos:'Actor estadounidense (Iron Man)',nacimiento:1965}],
+  '4-5':  [{emoji:'🎵',nombre:'Colin Powell',datos:'Político y general estadounidense (†2021)',nacimiento:1937}],
+  '4-6':  [{emoji:'🎵',nombre:'Paul Rudd',datos:'Actor estadounidense (Ant-Man)',nacimiento:1969}],
+  '4-7':  [{emoji:'🎵',nombre:'Russell Crowe',datos:'Actor neozelandés-australiano (Gladiator)',nacimiento:1964}],
+  '4-8':  [{emoji:'🔬',nombre:'Vivienne Westwood',datos:'Diseñadora de moda inglesa (†2022)',nacimiento:1941}],
+  '4-9':  [{emoji:'🎵',nombre:'Leighton Meester',datos:'Actriz y cantante estadounidense (Gossip Girl)',nacimiento:1986}],
+  '4-10': [{emoji:'🎵',nombre:'Mandy Moore',datos:'Cantante y actriz estadounidense',nacimiento:1984}],
+  '4-11': [{emoji:'🎵',nombre:'Jennifer Esposito',datos:'Actriz estadounidense (Blue Bloods)',nacimiento:1972}],
+  '4-12': [{emoji:'🚀',nombre:'Yuri Gagarin',datos:'Cosmonauta soviético, primer hombre en el espacio (†1968)',nacimiento:1934}],
+  '4-13': [{emoji:'🎵',nombre:'Thomas Jefferson',datos:'3.er Presidente de EE.UU. (†1826)',nacimiento:1743}],
+  '4-14': [{emoji:'🎵',nombre:'Adrien Brody',datos:'Actor estadounidense, Premio Oscar',nacimiento:1973}],
+  '4-15': [{emoji:'🎨',nombre:'Leonardo da Vinci',datos:'Genio del Renacimiento italiano (†1519)',nacimiento:1452}],
+  '4-16': [{emoji:'🎵',nombre:'Charlie Chaplin',datos:'Actor y director inglés (†1977)',nacimiento:1889}],
+  '4-17': [{emoji:'🎵',nombre:'Jennifer Garner',datos:'Actriz estadounidense',nacimiento:1972}],
+  '4-18': [{emoji:'🎬',nombre:'Conan O\'Brien',datos:'Presentador y comediante estadounidense',nacimiento:1963}],
+  '4-19': [{emoji:'🎵',nombre:'Kate Hudson',datos:'Actriz estadounidense',nacimiento:1979}],
+  '4-20': [{emoji:'🎵',nombre:'Carmen Electra',datos:'Actriz y modelo estadounidense',nacimiento:1972}],
+  '4-21': [{emoji:'🎵',nombre:'Queen Elizabeth II',datos:'Reina del Reino Unido (†2022)',nacimiento:1926}],
+  '4-22': [{emoji:'🎵',nombre:'Jack Nicholson',datos:'Actor estadounidense (El resplandor)',nacimiento:1937}],
+  '4-23': [{emoji:'🎨',nombre:'William Shakespeare',datos:'El Bardo, dramaturgo inglés (†1616)',nacimiento:1564}],
+  '4-24': [{emoji:'🎵',nombre:'Barbra Streisand',datos:'Cantante y actriz estadounidense',nacimiento:1942}],
+  '4-25': [{emoji:'🎵',nombre:'Renée Zellweger',datos:'Actriz estadounidense (Bridget Jones)',nacimiento:1969}],
+  '4-26': [{emoji:'🎵',nombre:'Channing Tatum',datos:'Actor estadounidense',nacimiento:1980}],
+  '4-27': [{emoji:'🎵',nombre:'Ulysses S. Grant',datos:'18.º Presidente de EE.UU. (†1885)',nacimiento:1822}],
+  '4-28': [{emoji:'🎵',nombre:'Jay Leno',datos:'Presentador estadounidense',nacimiento:1950}],
+  '4-29': [{emoji:'🎵',nombre:'Uma Thurman',datos:'Actriz estadounidense (Pulp Fiction)',nacimiento:1970}],
+  '4-30': [{emoji:'🎵',nombre:'Kirsten Dunst',datos:'Actriz estadounidense (Spider-Man)',nacimiento:1982}],
+  '5-1':  [{emoji:'🎵',nombre:'Tim McGraw',datos:'Cantante country estadounidense',nacimiento:1967}],
+  '5-2':  [{emoji:'🎨',nombre:'Leonardo da Vinci',datos:'Murió en Amboise (Francia) en esta fecha (1519)',nacimiento:1452}],
+  '5-3':  [{emoji:'🎵',nombre:'James Brown',datos:'"El Padrino del Soul" (†2006)',nacimiento:1933}],
+  '5-4':  [{emoji:'🎵',nombre:'Audrey Hepburn',datos:'Actriz belga-británica, icono de moda (†1993)',nacimiento:1929}],
+  '5-5':  [{emoji:'🎵',nombre:'Adele',datos:'Cantante y compositora inglesa',nacimiento:1988}],
+  '5-6':  [{emoji:'🎵',nombre:'Sigmund Freud',datos:'Neurólogo y psicoanalista austriaco (†1939)',nacimiento:1856}],
+  '5-7':  [{emoji:'🎵',nombre:'Brahms',datos:'Compositor alemán (†1897)',nacimiento:1833}],
+  '5-8':  [{emoji:'🎵',nombre:'Enrique VIII',datos:'Rey de Inglaterra, célebre por sus seis esposas (†1547)',nacimiento:1491}],
+  '5-9':  [{emoji:'🎵',nombre:'Billy Joel',datos:'Cantante y pianista estadounidense',nacimiento:1949}],
+  '5-10': [{emoji:'🎵',nombre:'Bono',datos:'Vocalista de U2 y activista irlandés',nacimiento:1960}],
+  '5-11': [{emoji:'🎵',nombre:'Valentino Rossi',datos:'Piloto italiano de MotoGP, "El Doctor"',nacimiento:1979}],
+  '5-12': [{emoji:'🎬',nombre:'Emilio Estévez',datos:'Actor y director estadounidense (Mighty Ducks)',nacimiento:1962}],
+  '5-13': [{emoji:'🎵',nombre:'Stevie Wonder',datos:'Músico y cantante estadounidense',nacimiento:1950}],
+  '5-14': [{emoji:'🎵',nombre:'Mark Zuckerberg',datos:'Cofundador de Facebook/Meta',nacimiento:1984}],
+  '5-15': [{emoji:'🎵',nombre:'Zara Phillips',datos:'Nieta de la reina Isabel II',nacimiento:1981}],
+  '5-16': [{emoji:'🎵',nombre:'Megan Fox',datos:'Actriz y modelo estadounidense',nacimiento:1986}],
+  '5-17': [{emoji:'🎵',nombre:'Jordan Knight',datos:'Cantante de New Kids on the Block',nacimiento:1970}],
+  '5-18': [{emoji:'🎵',nombre:'Tina Fey',datos:'Actriz y guionista estadounidense (30 Rock)',nacimiento:1970}],
+  '5-19': [{emoji:'🎵',nombre:'Ana Obregón',datos:'Actriz y presentadora española',nacimiento:1955}],
+  '5-20': [{emoji:'🎵',nombre:'Cher',datos:'Cantante y actriz estadounidense, "la Diosa del Pop"',nacimiento:1946}],
+  '5-21': [{emoji:'🎵',nombre:'Gotye',datos:'Músico belga-australiano ("Somebody That I Used to Know")',nacimiento:1980}],
+  '5-22': [{emoji:'🎵',nombre:'Naomi Campbell',datos:'Modelo y actriz inglesa',nacimiento:1970}],
+  '5-23': [{emoji:'🎵',nombre:'Joan Collins',datos:'Actriz inglesa (Dynasty)',nacimiento:1933}],
+  '5-24': [{emoji:'🎵',nombre:'Bob Dylan',datos:'Cantautor estadounidense, Premio Nobel de Literatura',nacimiento:1941}],
+  '5-25': [{emoji:'🎵',nombre:'Ian McKellen',datos:'Actor inglés (Gandalf en El Señor de los Anillos)',nacimiento:1939}],
+  '5-26': [{emoji:'🎵',nombre:'Lenny Kravitz',datos:'Músico y actor estadounidense',nacimiento:1964}],
+  '5-27': [{emoji:'🎵',nombre:'Paul Bettany',datos:'Actor inglés (Vision en Marvel)',nacimiento:1971}],
+  '5-28': [{emoji:'🎵',nombre:'Kylie Minogue',datos:'Cantante australiana',nacimiento:1968}],
+  '5-29': [{emoji:'🎵',nombre:'John F. Kennedy',datos:'35.º Presidente de EE.UU. (†1963)',nacimiento:1917}],
+  '5-30': [{emoji:'🎵',nombre:'Cee Lo Green',datos:'Cantante y compositor estadounidense',nacimiento:1974}],
+  '5-31': [{emoji:'🎵',nombre:'Brooke Shields',datos:'Actriz y modelo estadounidense',nacimiento:1965}],
+  '6-1':  [{emoji:'🎵',nombre:'Morgan Freeman',datos:'Actor estadounidense',nacimiento:1937}],
+  '6-2':  [{emoji:'🎵',nombre:'Zachary Quinto',datos:'Actor estadounidense (Spock en Star Trek)',nacimiento:1977}],
+  '6-3':  [{emoji:'🎵',nombre:'Rafael Nadal',datos:'Tenista español, 22 Grand Slams',nacimiento:1986}],
+  '6-4':  [{emoji:'🎵',nombre:'Angelina Jolie',datos:'Actriz y activista estadounidense',nacimiento:1975}],
+  '6-5':  [{emoji:'🎵',nombre:'Mark Wahlberg',datos:'Actor y productor estadounidense',nacimiento:1971}],
+  '6-6':  [{emoji:'✍️',nombre:'Aleksandr Pushkin',datos:'Poeta y escritor ruso (†1837)',nacimiento:1799}],
+  '6-7':  [{emoji:'🎵',nombre:'Prince',datos:'Músico y artista estadounidense (†2016)',nacimiento:1958}],
+  '6-8':  [{emoji:'🎵',nombre:'Kanye West',datos:'Rapero y productor estadounidense',nacimiento:1977}],
+  '6-9':  [{emoji:'🎨',nombre:'Johnny Depp',datos:'Actor estadounidense (Jack Sparrow)',nacimiento:1963}],
+  '6-10': [{emoji:'🎵',nombre:'Judy Garland',datos:'Actriz y cantante estadounidense (El Mago de Oz, †1969)',nacimiento:1922}],
+  '6-11': [{emoji:'🎵',nombre:'Shia LaBeouf',datos:'Actor estadounidense (Transformers)',nacimiento:1986}],
+  '6-12': [{emoji:'🎵',nombre:'George H.W. Bush',datos:'41.º Presidente de EE.UU. (†2018)',nacimiento:1924}],
+  '6-13': [{emoji:'🎵',nombre:'Mary-Kate y Ashley Olsen',datos:'Actrices y diseñadoras estadounidenses (gemelas)',nacimiento:1986}],
+  '6-14': [{emoji:'🎵',nombre:'Boy George',datos:'Cantante inglés (Culture Club)',nacimiento:1961}],
+  '6-15': [{emoji:'🎵',nombre:'Neil Patrick Harris',datos:'Actor y presentador estadounidense',nacimiento:1973}],
+  '6-16': [{emoji:'🎵',nombre:'Tupac Shakur',datos:'Rapero y actor estadounidense (†1996)',nacimiento:1971}],
+  '6-17': [{emoji:'🎵',nombre:'Venus Williams',datos:'Tenista estadounidense',nacimiento:1980}],
+  '6-18': [{emoji:'🎵',nombre:'Paul McCartney',datos:'Músico inglés, ex Beatle',nacimiento:1942}],
+  '6-19': [{emoji:'🎵',nombre:'Salman Rushdie',datos:'Escritor angloindio (Los versos satánicos)',nacimiento:1947}],
+  '6-20': [{emoji:'🎵',nombre:'Nicole Kidman',datos:'Actriz australiana-estadounidense, Premio Oscar',nacimiento:1967}],
+  '6-21': [{emoji:'🎵',nombre:'Prince William',datos:'Príncipe de Gales, heredero a la Corona británica',nacimiento:1982}],
+  '6-22': [{emoji:'🎵',nombre:'Meryl Streep',datos:'Actriz estadounidense, la más premiada de Hollywood',nacimiento:1949}],
+  '6-23': [{emoji:'🎵',nombre:'Zinedine Zidane',datos:'Exfutbolista y entrenador francés-argelino',nacimiento:1972}],
+  '6-24': [{emoji:'🎵',nombre:'Lionel Messi',datos:'Futbolista argentino, 8 Balones de Oro',nacimiento:1987}],
+  '6-25': [{emoji:'🎵',nombre:'George Michael',datos:'Cantante griego-inglés (†2016)',nacimiento:1963}],
+  '6-26': [{emoji:'🎵',nombre:'Ariana Grande',datos:'Cantante y actriz estadounidense',nacimiento:1993}],
+  '6-27': [{emoji:'🎵',nombre:'J.J. Abrams',datos:'Director y productor estadounidense (Star Wars, Star Trek)',nacimiento:1966}],
+  '6-28': [{emoji:'🎵',nombre:'Kathy Bates',datos:'Actriz estadounidense (Misery, AHS)',nacimiento:1948}],
+  '6-29': [{emoji:'🎵',nombre:'Camille Saint-Saëns',datos:'Compositor francés (†1921)',nacimiento:1835}],
+  '6-30': [{emoji:'🎵',nombre:'Fantasia Barrino',datos:'Cantante estadounidense, ganadora de American Idol',nacimiento:1984}],
+  '7-1':  [{emoji:'🎵',nombre:'Princess Diana',datos:'Princesa de Gales, "la princesa del pueblo" (†1997)',nacimiento:1961}],
+  '7-2':  [{emoji:'✍️',nombre:'Hermann Hesse',datos:'Escritor alemán-suizo, Premio Nobel (†1962)',nacimiento:1877}],
+  '7-3':  [{emoji:'🎵',nombre:'Franz Kafka',datos:'Escritor checo (La metamorfosis, †1924)',nacimiento:1883}],
+  '7-4':  [{emoji:'🎵',nombre:'Post Malone',datos:'Rapero y cantante estadounidense',nacimiento:1995}],
+  '7-5':  [{emoji:'🎵',nombre:'Edie Falco',datos:'Actriz estadounidense (Los Sopranos)',nacimiento:1963}],
+  '7-6':  [{emoji:'🎵',nombre:'Sylvester Stallone',datos:'Actor y director estadounidense (Rocky, Rambo)',nacimiento:1946}],
+  '7-7':  [{emoji:'🎵',nombre:'Ringo Starr',datos:'Batería de los Beatles',nacimiento:1940}],
+  '7-8':  [{emoji:'🎵',nombre:'Kevin Bacon',datos:'Actor estadounidense',nacimiento:1958}],
+  '7-9':  [{emoji:'🎵',nombre:'Tom Hanks',datos:'Actor estadounidense, 2 veces Premio Oscar',nacimiento:1956}],
+  '7-10': [{emoji:'🎵',nombre:'Sofia Vergara',datos:'Actriz colombiana-estadounidense (Modern Family)',nacimiento:1972}],
+  '7-11': [{emoji:'🎵',nombre:'Yul Brynner',datos:'Actor ruso-estadounidense (†1985)',nacimiento:1920}],
+  '7-12': [{emoji:'⚽',nombre:'Malala Yousafzai',datos:'Activista pakistaní por la educación, Premio Nobel de la Paz',nacimiento:1997}],
+  '7-13': [{emoji:'🎵',nombre:'Harrison Ford',datos:'Actor estadounidense (Indiana Jones, Han Solo)',nacimiento:1942}],
+  '7-14': [{emoji:'🎵',nombre:'Jane Lynch',datos:'Actriz y comediante estadounidense',nacimiento:1960}],
+  '7-15': [{emoji:'🎵',nombre:'Forest Whitaker',datos:'Actor y director estadounidense, Premio Oscar',nacimiento:1961}],
+  '7-16': [{emoji:'🎵',nombre:'Will Ferrell',datos:'Actor y comediante estadounidense',nacimiento:1967}],
+  '7-17': [{emoji:'🎵',nombre:'Diahann Carroll',datos:'Actriz y cantante estadounidense (†2019)',nacimiento:1935}],
+  '7-18': [{emoji:'✊',nombre:'Nelson Mandela',datos:'Primer presidente de Sudáfrica post-apartheid (†2013)',nacimiento:1918},{emoji:'🌸',nombre:'Día de Santa Marina',datos:'¡Feliz día a todas las Marinas del mundo! 🌸',nacimiento:0}],
+  '7-19': [{emoji:'🎵',nombre:'Brian May',datos:'Guitarrista de Queen',nacimiento:1947}],
+  '7-20': [{emoji:'🎵',nombre:'Carlos Santana',datos:'Guitarrista mexicano-estadounidense',nacimiento:1947}],
+  '7-21': [{emoji:'🎵',nombre:'Josh Hartnett',datos:'Actor estadounidense',nacimiento:1978}],
+  '7-22': [{emoji:'🎵',nombre:'Danny Glover',datos:'Actor estadounidense (Lethal Weapon)',nacimiento:1946}],
+  '7-23': [{emoji:'🎵',nombre:'Monica Lewinsky',datos:'Activista y diseñadora estadounidense',nacimiento:1973}],
+  '7-24': [{emoji:'🎵',nombre:'Jennifer Lopez',datos:'Cantante, actriz y empresaria puertorriqueña-estadounidense',nacimiento:1969}],
+  '7-25': [{emoji:'🎵',nombre:'Matt LeBlanc',datos:'Actor estadounidense (Joey en Friends)',nacimiento:1967}],
+  '7-26': [{emoji:'🎵',nombre:'Mick Jagger',datos:'Cantante de los Rolling Stones',nacimiento:1943}],
+  '7-27': [{emoji:'🎵',nombre:'Roxanne McKee',datos:'Actriz inglesa',nacimiento:1980}],
+  '7-28': [{emoji:'🎵',nombre:'Soulja Boy',datos:'Rapero estadounidense',nacimiento:1990}],
+  '7-29': [{emoji:'🎵',nombre:'Martina McBride',datos:'Cantante country estadounidense',nacimiento:1966}],
+  '7-30': [{emoji:'🎵',nombre:'Arnold Schwarzenegger',datos:'Actor y político austríaco-estadounidense (Terminator)',nacimiento:1947}],
+  '7-31': [{emoji:'✍️',nombre:'J.K. Rowling',datos:'Escritora inglesa (Harry Potter)',nacimiento:1965}],
+  '8-1':  [{emoji:'🎵',nombre:'Herman Melville',datos:'Escritor estadounidense (Moby Dick, †1891)',nacimiento:1819}],
+  '8-2':  [{emoji:'🎵',nombre:'Mary-Louise Parker',datos:'Actriz estadounidense (Weeds)',nacimiento:1964}],
+  '8-3':  [{emoji:'🎵',nombre:'Tom Brady',datos:'Jugador de fútbol americano, 7 Super Bowls',nacimiento:1977}],
+  '8-4':  [{emoji:'🎵',nombre:'Barack Obama',datos:'44.º Presidente de los Estados Unidos',nacimiento:1961}],
+  '8-5':  [{emoji:'🎵',nombre:'Neil Armstrong',datos:'Primer hombre en pisar la Luna (†2012)',nacimiento:1930}],
+  '8-6':  [{emoji:'🎵',nombre:'Vera Farmiga',datos:'Actriz y directora estadounidense',nacimiento:1973}],
+  '8-7':  [{emoji:'🎵',nombre:'David Duchovny',datos:'Actor y escritor estadounidense (The X-Files)',nacimiento:1960}],
+  '8-8':  [{emoji:'🎵',nombre:'Roger Federer',datos:'Tenista suizo, 20 Grand Slams',nacimiento:1981}],
+  '8-9':  [{emoji:'🎵',nombre:'Whitney Houston',datos:'Cantante estadounidense (†2012)',nacimiento:1963}],
+  '8-10': [{emoji:'🎵',nombre:'Kylie Jenner',datos:'Empresaria y personalidad mediática estadounidense',nacimiento:1997}],
+  '8-11': [{emoji:'🎵',nombre:'Chris Hemsworth',datos:'Actor australiano (Thor en Marvel)',nacimiento:1983}],
+  '8-12': [{emoji:'🎵',nombre:'Cara Delevingne',datos:'Modelo y actriz inglesa',nacimiento:1992},{emoji:'🎵',nombre:'Pete Sampras',datos:'Tenista estadounidense, 14 Grand Slams',nacimiento:1971}],
+  '8-13': [{emoji:'🎵',nombre:'Fidel Castro',datos:'Político y revolucionario cubano (†2016)',nacimiento:1926}],
+  '8-14': [{emoji:'🎵',nombre:'Halle Berry',datos:'Actriz estadounidense, primera afroamericana en ganar el Oscar',nacimiento:1966}],
+  '8-15': [{emoji:'🎵',nombre:'Ben Affleck',datos:'Actor y director estadounidense (Batman)',nacimiento:1972}],
+  '8-16': [{emoji:'🎵',nombre:'Madonna',datos:'Cantante y actriz estadounidense, la "Reina del Pop"',nacimiento:1958}],
+  '8-17': [{emoji:'🎵',nombre:'Robert De Niro',datos:'Actor estadounidense (El Padrino II, Taxi Driver)',nacimiento:1943}],
+  '8-18': [{emoji:'🎵',nombre:'Edward Norton',datos:'Actor y director estadounidense (Fight Club)',nacimiento:1969}],
+  '8-19': [{emoji:'🎵',nombre:'Matthew Perry',datos:'Actor estadounidense (Chandler en Friends, †2023)',nacimiento:1969}],
+  '8-20': [{emoji:'🎵',nombre:'Robert Plant',datos:'Vocalista de Led Zeppelin',nacimiento:1948}],
+  '8-21': [{emoji:'🎵',nombre:'Kim Cattrall',datos:'Actriz inglesa-canadiense (Samantha en Sex and the City)',nacimiento:1956}],
+  '8-22': [{emoji:'🎵',nombre:'Kristen Wiig',datos:'Actriz y guionista estadounidense',nacimiento:1973}],
+  '8-23': [{emoji:'🎵',nombre:'Kobe Bryant',datos:'Jugador de baloncesto estadounidense (†2020)',nacimiento:1978}],
+  '8-24': [{emoji:'🎵',nombre:'Rupert Grint',datos:'Actor inglés (Ron Weasley en Harry Potter)',nacimiento:1988}],
+  '8-25': [{emoji:'🎬',nombre:'Sean Connery',datos:'Actor escocés, primer James Bond (†2020)',nacimiento:1930}],
+  '8-26': [{emoji:'🎵',nombre:'Macaulay Culkin',datos:'Actor estadounidense (Solo en casa)',nacimiento:1980}],
+  '8-27': [{emoji:'🎵',nombre:'Aaron Paul',datos:'Actor estadounidense (Breaking Bad)',nacimiento:1979}],
+  '8-28': [{emoji:'🎵',nombre:'Jack Black',datos:'Actor, músico y comediante estadounidense',nacimiento:1969}],
+  '8-29': [{emoji:'🎵',nombre:'Michael Jackson',datos:'"El Rey del Pop" (†2009)',nacimiento:1958}],
+  '8-30': [{emoji:'🎵',nombre:'Cameron Diaz',datos:'Actriz y modelo estadounidense',nacimiento:1972}],
+  '8-31': [{emoji:'🎵',nombre:'Van Morrison',datos:'Músico y cantante irlandés',nacimiento:1945}],
+  '9-1':  [{emoji:'🎵',nombre:'Dr. Phil',datos:'Psicólogo y presentador estadounidense',nacimiento:1950}],
+  '9-2':  [{emoji:'🎵',nombre:'Keanu Reeves',datos:'Actor canadiense (Matrix, John Wick)',nacimiento:1964}],
+  '9-3':  [{emoji:'🎵',nombre:'Charlie Sheen',datos:'Actor estadounidense (Two and a Half Men)',nacimiento:1965}],
+  '9-4':  [{emoji:'🎵',nombre:'Beyoncé',datos:'Cantante y actriz estadounidense, icono del pop',nacimiento:1981}],
+  '9-5':  [{emoji:'🎵',nombre:'Zendaya',datos:'Actriz y cantante estadounidense',nacimiento:1996}],
+  '9-6':  [{emoji:'🎵',nombre:'Idris Elba',datos:'Actor inglés (Luther, Mandela)',nacimiento:1972}],
+  '9-7':  [{emoji:'🎵',nombre:'Evan Rachel Wood',datos:'Actriz estadounidense (Westworld)',nacimiento:1987}],
+  '9-8':  [{emoji:'🎵',nombre:'Pink',datos:'Cantante y actriz estadounidense',nacimiento:1979}],
+  '9-9':  [{emoji:'🎵',nombre:'Adam Sandler',datos:'Actor y comediante estadounidense',nacimiento:1966}],
+  '9-10': [{emoji:'🎵',nombre:'Ryan Phillippe',datos:'Actor estadounidense',nacimiento:1974}],
+  '9-11': [{emoji:'🎵',nombre:'Ludacris',datos:'Rapero y actor estadounidense',nacimiento:1977}],
+  '9-12': [{emoji:'🎵',nombre:'Jennifer Hudson',datos:'Cantante y actriz estadounidense, Premio Oscar',nacimiento:1981}],
+  '9-13': [{emoji:'🎵',nombre:'Fiona Apple',datos:'Cantante y pianista estadounidense',nacimiento:1977}],
+  '9-14': [{emoji:'🎵',nombre:'Amy Winehouse',datos:'Cantante y compositora inglesa (†2011)',nacimiento:1983}],
+  '9-15': [{emoji:'🎵',nombre:'Tommy Lee Jones',datos:'Actor estadounidense (Men in Black)',nacimiento:1946}],
+  '9-16': [{emoji:'🎵',nombre:'Marc Anthony',datos:'Cantante puertorriqueño de salsa',nacimiento:1968}],
+  '9-17': [{emoji:'🎵',nombre:'Brie Larson',datos:'Actriz estadounidense, Captain Marvel',nacimiento:1989}],
+  '9-18': [{emoji:'🎵',nombre:'Jada Pinkett Smith',datos:'Actriz y presentadora estadounidense',nacimiento:1971}],
+  '9-19': [{emoji:'🎵',nombre:'Jeremy Irons',datos:'Actor inglés, Premio Oscar',nacimiento:1948}],
+  '9-20': [{emoji:'🎵',nombre:'Sophia Loren',datos:'Actriz italiana, Premio Oscar',nacimiento:1934}],
+  '9-21': [{emoji:'🎵',nombre:'Stephen King',datos:'Escritor estadounidense de terror',nacimiento:1947}],
+  '9-22': [{emoji:'🎵',nombre:'Tom Felton',datos:'Actor inglés (Draco Malfoy en Harry Potter)',nacimiento:1987}],
+  '9-23': [{emoji:'⚽',nombre:'Bruce Springsteen',datos:'Músico y compositor estadounidense',nacimiento:1949}],
+  '9-24': [{emoji:'🎵',nombre:'Nia Long',datos:'Actriz estadounidense (Fresh Prince)',nacimiento:1970}],
+  '9-25': [{emoji:'🎵',nombre:'Will Smith',datos:'Actor y rapper estadounidense (Ali, Men in Black)',nacimiento:1968}],
+  '9-26': [{emoji:'🎵',nombre:'Olivia Newton-John',datos:'Cantante y actriz australiana-inglesa (†2022)',nacimiento:1948}],
+  '9-27': [{emoji:'🎵',nombre:'Gwyneth Paltrow',datos:'Actriz y empresaria estadounidense, Premio Oscar',nacimiento:1972}],
+  '9-28': [{emoji:'🎵',nombre:'Hilary Duff',datos:'Actriz y cantante estadounidense',nacimiento:1987}],
+  '9-29': [{emoji:'🎵',nombre:'Bob Newhart',datos:'Actor y comediante estadounidense',nacimiento:1929}],
+  '9-30': [{emoji:'🎵',nombre:'Marion Cotillard',datos:'Actriz francesa, Premio Oscar',nacimiento:1975}],
+  '10-1': [{emoji:'🎵',nombre:'Julie Andrews',datos:'Actriz y cantante inglesa (Mary Poppins, Sonrisas y lágrimas)',nacimiento:1935}],
+  '10-2': [{emoji:'✊',nombre:'Mahatma Gandhi',datos:'Líder pacifista indio (†1948)',nacimiento:1869}],
+  '10-3': [{emoji:'🎵',nombre:'Neve Campbell',datos:'Actriz canadiense (Scream)',nacimiento:1973}],
+  '10-4': [{emoji:'🎵',nombre:'Susan Sarandon',datos:'Actriz estadounidense, Premio Oscar',nacimiento:1946}],
+  '10-5': [{emoji:'🎵',nombre:'Kate Winslet',datos:'Actriz inglesa (Titanic, Premio Oscar)',nacimiento:1975}],
+  '10-6': [{emoji:'🎵',nombre:'Britt Robertson',datos:'Actriz estadounidense',nacimiento:1990}],
+  '10-7': [{emoji:'🎵',nombre:'Vladimir Putin',datos:'Político ruso, Presidente de Rusia',nacimiento:1952}],
+  '10-8': [{emoji:'🎵',nombre:'Matt Damon',datos:'Actor y guionista estadounidense',nacimiento:1970}],
+  '10-9': [{emoji:'🎵',nombre:'John Lennon',datos:'Músico inglés, cofundador de los Beatles (†1980)',nacimiento:1940}],
+  '10-10':[{emoji:'🎵',nombre:'David Lee Roth',datos:'Vocalista de Van Halen',nacimiento:1954}],
+  '10-11':[{emoji:'🎵',nombre:'Luke Perry',datos:'Actor estadounidense (Beverly Hills 90210, †2019)',nacimiento:1966}],
+  '10-12':[{emoji:'🎵',nombre:'Hugh Jackman',datos:'Actor y productor australiano (Wolverine)',nacimiento:1968}],
+  '10-13':[{emoji:'🎵',nombre:'Paul Simon',datos:'Cantautor estadounidense (Simon & Garfunkel)',nacimiento:1941}],
+  '10-14':[{emoji:'🎵',nombre:'Usher',datos:'Cantante y bailarín estadounidense',nacimiento:1978}],
+  '10-15':[{emoji:'🎵',nombre:'Eminem',datos:'Rapero y productor estadounidense',nacimiento:1972}],
+  '10-16':[{emoji:'🎵',nombre:'Tim Robbins',datos:'Actor y director estadounidense (The Shawshank Redemption)',nacimiento:1958}],
+  '10-17':[{emoji:'🎵',nombre:'Eminem',datos:'Rapero (doble celebración en lista)',nacimiento:1972}],
+  '10-18':[{emoji:'🎵',nombre:'Zac Efron',datos:'Actor y cantante estadounidense (High School Musical)',nacimiento:1987}],
+  '10-19':[{emoji:'🎵',nombre:'Jon Favreau',datos:'Director y actor estadounidense (Iron Man)',nacimiento:1966}],
+  '10-20':[{emoji:'🎵',nombre:'Snoop Dogg',datos:'Rapero y productor estadounidense',nacimiento:1971}],
+  '10-21':[{emoji:'🎵',nombre:'Kim Kardashian',datos:'Empresaria y personalidad mediática estadounidense',nacimiento:1980}],
+  '10-22':[{emoji:'🎵',nombre:'Jeff Goldblum',datos:'Actor estadounidense (Jurassic Park)',nacimiento:1952}],
+  '10-23':[{emoji:'🎵',nombre:'Ryan Reynolds',datos:'Actor canadiense (Deadpool)',nacimiento:1976}],
+  '10-24':[{emoji:'🎵',nombre:'Drake',datos:'Rapero y cantante canadiense',nacimiento:1986}],
+  '10-25':[{emoji:'🎨',nombre:'Pablo Picasso',datos:'Pintor y escultor español (†1973)',nacimiento:1881}],
+  '10-26':[{emoji:'🎵',nombre:'Seth MacFarlane',datos:'Creador de Padre de Familia',nacimiento:1973}],
+  '10-27':[{emoji:'🎵',nombre:'Kelly Osbourne',datos:'Cantante y personalidad inglesa',nacimiento:1984}],
+  '10-28':[{emoji:'🎵',nombre:'Joaquin Phoenix',datos:'Actor estadounidense (Joker, Premio Oscar)',nacimiento:1974}],
+  '10-29':[{emoji:'🎵',nombre:'Winona Ryder',datos:'Actriz estadounidense (Stranger Things)',nacimiento:1971}],
+  '10-30':[{emoji:'🎵',nombre:'Diego Maradona',datos:'Futbolista argentino, uno de los mejores de la historia (†2020)',nacimiento:1960}],
+  '10-31':[{emoji:'🎵',nombre:'Rob Schneider',datos:'Actor y comediante estadounidense',nacimiento:1963}],
+  '11-1': [{emoji:'🎵',nombre:'Penn Badgley',datos:'Actor estadounidense (You)',nacimiento:1986}],
+  '11-2': [{emoji:'🎵',nombre:'Nelly',datos:'Rapero estadounidense',nacimiento:1974}],
+  '11-3': [{emoji:'🎵',nombre:'Roseanne Barr',datos:'Actriz y comediante estadounidense',nacimiento:1952}],
+  '11-4': [{emoji:'🎵',nombre:'Matthew McConaughey',datos:'Actor estadounidense, Premio Oscar',nacimiento:1969}],
+  '11-5': [{emoji:'🎵',nombre:'Famke Janssen',datos:'Actriz neerlandesa (Jean Grey en X-Men)',nacimiento:1964}],
+  '11-6': [{emoji:'🎵',nombre:'Emma Stone',datos:'Actriz estadounidense, Premio Oscar (La La Land)',nacimiento:1988}],
+  '11-7': [{emoji:'🔬',nombre:'Marie Curie',datos:'Científica polaca-francesa, 2 veces Premio Nobel (†1934)',nacimiento:1867}],
+  '11-8': [{emoji:'🎵',nombre:'Tara Reid',datos:'Actriz estadounidense (American Pie)',nacimiento:1975}],
+  '11-9': [{emoji:'🎵',nombre:'Nick Lachey',datos:'Cantante estadounidense',nacimiento:1973}],
+  '11-10':[{emoji:'🎵',nombre:'Brittany Murphy',datos:'Actriz estadounidense (†2009)',nacimiento:1977}],
+  '11-11':[{emoji:'🎵',nombre:'Leonardo DiCaprio',datos:'Actor y productor estadounidense (Titanic, El Revenant)',nacimiento:1974}],
+  '11-12':[{emoji:'🎵',nombre:'Anne Hathaway',datos:'Actriz estadounidense (El diablo viste de Prada)',nacimiento:1982}],
+  '11-13':[{emoji:'🎵',nombre:'Gerard Butler',datos:'Actor escocés (300)',nacimiento:1969}],
+  '11-14':[{emoji:'🎵',nombre:'Prince Carlos',datos:'Rey Carlos III del Reino Unido',nacimiento:1948}],
+  '11-15':[{emoji:'🎵',nombre:'Chad Kroeger',datos:'Vocalista de Nickelback',nacimiento:1974}],
+  '11-16':[{emoji:'🎵',nombre:'Maggie Gyllenhaal',datos:'Actriz y directora estadounidense',nacimiento:1977}],
+  '11-17':[{emoji:'🎵',nombre:'Rachel McAdams',datos:'Actriz canadiense (El diario de Noah)',nacimiento:1978}],
+  '11-18':[{emoji:'🎵',nombre:'Owen Wilson',datos:'Actor y guionista estadounidense',nacimiento:1968}],
+  '11-19':[{emoji:'🎵',nombre:'Jodie Foster',datos:'Actriz y directora estadounidense, 2 veces Premio Oscar',nacimiento:1962}],
+  '11-20':[{emoji:'🎵',nombre:'Joe Biden',datos:'46.º Presidente de los Estados Unidos',nacimiento:1942}],
+  '11-21':[{emoji:'🎵',nombre:'Bjork',datos:'Cantante y artista islandesa',nacimiento:1965}],
+  '11-22':[{emoji:'🎵',nombre:'Scarlett Johansson',datos:'Actriz estadounidense (Black Widow, Her)',nacimiento:1984}],
+  '11-23':[{emoji:'🎵',nombre:'Miley Cyrus',datos:'Cantante y actriz estadounidense',nacimiento:1992}],
+  '11-24':[{emoji:'🎵',nombre:'Katherine Heigl',datos:'Actriz estadounidense (Anatomía de Grey)',nacimiento:1978}],
+  '11-25':[{emoji:'🎵',nombre:'John F. Kennedy Jr.',datos:'Abogado y editor estadounidense (†1999)',nacimiento:1960}],
+  '11-26':[{emoji:'🎵',nombre:'Tina Turner',datos:'Cantante estadounidense, "La Reina del Rock" (†2023)',nacimiento:1939}],
+  '11-27':[{emoji:'🎵',nombre:'Jimi Hendrix',datos:'Guitarrista estadounidense (†1970)',nacimiento:1942}],
+  '11-28':[{emoji:'🎵',nombre:'Jon Stewart',datos:'Presentador y comediante estadounidense',nacimiento:1962}],
+  '11-29':[{emoji:'🎵',nombre:'Anna Faris',datos:'Actriz y comediante estadounidense',nacimiento:1976}],
+  '11-30':[{emoji:'🎵',nombre:'Winston Churchill',datos:'Primer Ministro británico (†1965)',nacimiento:1874}],
+  '12-1': [{emoji:'🎵',nombre:'Bette Midler',datos:'Cantante y actriz estadounidense',nacimiento:1945}],
+  '12-2': [{emoji:'🎵',nombre:'Britney Spears',datos:'Cantante estadounidense',nacimiento:1981}],
+  '12-3': [{emoji:'🎵',nombre:'Ozzy Osbourne',datos:'Músico inglés, Black Sabbath',nacimiento:1948}],
+  '12-4': [{emoji:'🎵',nombre:'Jay-Z',datos:'Rapero y empresario estadounidense',nacimiento:1969}],
+  '12-5': [{emoji:'🎵',nombre:'Walt Disney',datos:'Animador, director y productor estadounidense (†1966)',nacimiento:1901}],
+  '12-6': [{emoji:'🎵',nombre:'Nick Cannon',datos:'Presentador y actor estadounidense',nacimiento:1980}],
+  '12-7': [{emoji:'🎵',nombre:'Tom Waits',datos:'Cantante y compositor estadounidense',nacimiento:1949}],
+  '12-8': [{emoji:'🎵',nombre:'Kim Basinger',datos:'Actriz y modelo estadounidense, Premio Oscar',nacimiento:1953}],
+  '12-9': [{emoji:'🎵',nombre:'John Malkovich',datos:'Actor y productor estadounidense',nacimiento:1953}],
+  '12-10':[{emoji:'🎵',nombre:'Emily Dickinson',datos:'Poetisa estadounidense (†1886)',nacimiento:1830}],
+  '12-11':[{emoji:'🎵',nombre:'Rey Felipe VI',datos:'Rey de España',nacimiento:1968}],
+  '12-12':[{emoji:'🎵',nombre:'Frank Sinatra',datos:'"La Voz", cantante y actor estadounidense (†1998)',nacimiento:1915}],
+  '12-13':[{emoji:'🎵',nombre:'Taylor Swift',datos:'Cantante y compositora estadounidense',nacimiento:1989}],
+  '12-14':[{emoji:'🎵',nombre:'Vanessa Hudgens',datos:'Actriz y cantante estadounidense (High School Musical)',nacimiento:1988}],
+  '12-15':[{emoji:'🎵',nombre:'Don Johnson',datos:'Actor estadounidense (Miami Vice)',nacimiento:1949}],
+  '12-16':[{emoji:'🎵',nombre:'Ludwig van Beethoven',datos:'Compositor alemán (†1827)',nacimiento:1770}],
+  '12-17':[{emoji:'🎵',nombre:'Milla Jovovich',datos:'Actriz y modelo ucrania-estadounidense (Resident Evil)',nacimiento:1975}],
+  '12-18':[{emoji:'🎵',nombre:'Brad Pitt',datos:'Actor y productor estadounidense (Fight Club, Se7en)',nacimiento:1963}],
+  '12-19':[{emoji:'🎵',nombre:'Jake Gyllenhaal',datos:'Actor estadounidense (Donnie Darko)',nacimiento:1980}],
+  '12-20':[{emoji:'🎵',nombre:'Uri Geller',datos:'Mentalista e ilusionista israelí',nacimiento:1946}],
+  '12-21':[{emoji:'🎵',nombre:'Jane Fonda',datos:'Actriz y activista estadounidense',nacimiento:1937}],
+  '12-22':[{emoji:'🎵',nombre:'Ralph Fiennes',datos:'Actor inglés (Voldemort en Harry Potter)',nacimiento:1962}],
+  '12-23':[{emoji:'🎵',nombre:'Carla Bruni',datos:'Modelo, cantante y ex Primera Dama francesa',nacimiento:1967}],
+  '12-24':[{emoji:'🎵',nombre:'Ryan Seacrest',datos:'Presentador y productor estadounidense',nacimiento:1974}],
+  '12-25':[{emoji:'🎵',nombre:'Humphrey Bogart',datos:'Actor estadounidense (†1957)',nacimiento:1899},{emoji:'🎵',nombre:'Annie Lennox',datos:'Cantante escocesa (Eurythmics)',nacimiento:1954}],
+  '12-26':[{emoji:'🎵',nombre:'Jared Leto',datos:'Actor y músico estadounidense (30 Seconds to Mars)',nacimiento:1971}],
+  '12-27':[{emoji:'🎵',nombre:'Marlene Dietrich',datos:'Actriz y cantante alemana (†1992)',nacimiento:1901}],
+  '12-28':[{emoji:'🎵',nombre:'Sienna Miller',datos:'Actriz y modelo inglesa',nacimiento:1981}],
+  '12-29':[{emoji:'🎵',nombre:'Jude Law',datos:'Actor inglés',nacimiento:1972}],
+  '12-30':[{emoji:'🎵',nombre:'Tiger Woods',datos:'Golfista estadounidense, uno de los mejores de la historia',nacimiento:1975}],
+  '12-31':[{emoji:'🎵',nombre:'Val Kilmer',datos:'Actor estadounidense (Batman Forever, †2025)',nacimiento:1959},{emoji:'🎵',nombre:'Anthony Hopkins',datos:'Actor galés, Premio Oscar (El silencio de los corderos)',nacimiento:1937}],
+};
+
+// ─── FASES LUNARES (aproximadas) ──────────────────────
+// Datos aproximados para 2026, Llanes (zona norte España)
+// Luna nueva, cuarto creciente, luna llena, cuarto menguante
+// Basado en cálculos astronómicos aproximados
+const LUNA_2026 = [
+  {fecha:'1-3',  fase:'Nueva',     icono:'🌑'},
+  {fecha:'1-10', fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'1-17', fase:'Llena',     icono:'🌕'},
+  {fecha:'1-25', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'2-1',  fase:'Nueva',     icono:'🌑'},
+  {fecha:'2-9',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'2-16', fase:'Llena',     icono:'🌕'},
+  {fecha:'2-24', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'3-3',  fase:'Nueva',     icono:'🌑'},
+  {fecha:'3-11', fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'3-18', fase:'Llena',     icono:'🌕'},
+  {fecha:'3-25', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'4-1',  fase:'Nueva',     icono:'🌑'},
+  {fecha:'4-9',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'4-16', fase:'Llena',     icono:'🌕'},
+  {fecha:'4-23', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'5-1',  fase:'Nueva',     icono:'🌑'},
+  {fecha:'5-8',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'5-16', fase:'Llena',     icono:'🌕'},
+  {fecha:'5-23', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'5-31', fase:'Nueva',     icono:'🌑'},
+  {fecha:'6-7',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'6-14', fase:'Llena',     icono:'🌕'},
+  {fecha:'6-21', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'6-29', fase:'Nueva',     icono:'🌑'},
+  {fecha:'7-6',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'7-14', fase:'Llena',     icono:'🌕'},
+  {fecha:'7-21', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'7-28', fase:'Nueva',     icono:'🌑'},
+  {fecha:'8-4',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'8-12', fase:'Llena',     icono:'🌕'},
+  {fecha:'8-20', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'8-26', fase:'Nueva',     icono:'🌑'},
+  {fecha:'9-3',  fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'9-10', fase:'Llena',     icono:'🌕'},
+  {fecha:'9-19', fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'9-25', fase:'Nueva',     icono:'🌑'},
+  {fecha:'10-2', fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'10-10',fase:'Llena',     icono:'🌕'},
+  {fecha:'10-18',fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'10-25',fase:'Nueva',     icono:'🌑'},
+  {fecha:'11-1', fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'11-9', fase:'Llena',     icono:'🌕'},
+  {fecha:'11-17',fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'11-24',fase:'Nueva',     icono:'🌑'},
+  {fecha:'12-1', fase:'Cuarto creciente', icono:'🌓'},
+  {fecha:'12-9', fase:'Llena',     icono:'🌕'},
+  {fecha:'12-16',fase:'Cuarto menguante', icono:'🌗'},
+  {fecha:'12-23',fase:'Nueva',     icono:'🌑'},
+  {fecha:'12-31',fase:'Cuarto creciente', icono:'🌓'},
+];
+
+// ─── AMANECER / OCASO LLANES 2026 (aproximado, hora oficial) ─────
+// Llanes está a ~43.4°N, 4.76°O. Hora peninsular (UTC+1 invierno, UTC+2 verano)
+// Cambio horario: 29 marzo → verano; 25 octubre → invierno
+function getSolLlanes(mes, dia) {
+  const d = new Date(2026, mes-1, dia);
+  const diaAnyo = Math.round((d - new Date(2026,0,1)) / 86400000);
+  // Declinación solar aproximada
+  const decl = 23.45 * Math.sin((360/365) * (diaAnyo - 81) * Math.PI / 180);
+  const lat = 43.4 * Math.PI / 180;
+  const declRad = decl * Math.PI / 180;
+  const cosH = -Math.tan(lat) * Math.tan(declRad);
+  if (Math.abs(cosH) > 1) return {amanecer:'—', ocaso:'—'};
+  const H = Math.acos(cosH) * 180 / Math.PI;
+  const lon = -4.76;
+  const ec = ecuaciónTiempo(diaAnyo);
+  const transitoUTC = 12 - lon/15 - ec/60;
+  let amaUTC = transitoUTC - H/15;
+  let ocaUTC = transitoUTC + H/15;
+  // Horario verano: 29 mar al 25 oct
+  const esVerano = (mes > 3 || (mes === 3 && dia >= 29)) && (mes < 10 || (mes === 10 && dia <= 25));
+  const offset = esVerano ? 2 : 1;
+  const ama = amaUTC + offset;
+  const oca = ocaUTC + offset;
+  return {amanecer: fmtHora(ama), ocaso: fmtHora(oca)};
+}
+
+function ecuaciónTiempo(diaAnyo) {
+  const B = (360/365) * (diaAnyo - 81) * Math.PI / 180;
+  return 9.87 * Math.sin(2*B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+}
+
+function fmtHora(h) {
+  const hInt = Math.floor(h) % 24;
+  const m = Math.round((h - Math.floor(h)) * 60);
+  return (hInt < 10 ? '0' : '') + hInt + ':' + (m < 10 ? '0' : '') + m;
+}
+
+function getLunaFase(mes, dia) {
+  const key = mes + '-' + dia;
+  const exacta = LUNA_2026.find(l => l.fecha === key);
+  if (exacta) return {...exacta, exacta: true};
+  // Buscar la fase más cercana
+  const d = new Date(2026, mes-1, dia);
+  let masProxima = null;
+  let minDiff = Infinity;
+  for (const l of LUNA_2026) {
+    const partes = l.fecha.split('-').map(Number);
+    const ld = new Date(2026, partes[0]-1, partes[1]);
+    const diff = Math.abs(d - ld);
+    if (diff < minDiff) { minDiff = diff; masProxima = l; }
+  }
+  const diasDiff = Math.round(minDiff / 86400000);
+  // Interpolación simple de fase
+  if (!masProxima) return {fase:'Creciente', icono:'🌒', exacta:false};
+  const fases = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+  const idx = ['Nueva','Cuarto creciente','Llena','Cuarto menguante'].indexOf(masProxima.fase);
+  // Interpolar dentro del ciclo lunar de ~29.5 días
+  const dx = new Date(2026, mes-1, dia);
+  const dm = new Date(2026, parseInt(masProxima.fecha)-1, parseInt(masProxima.fecha.split('-')[1]));
+  // Encontrar la siguiente fase
+  const idxLuna = LUNA_2026.indexOf(masProxima);
+  let progreso = 0;
+  if (idxLuna < LUNA_2026.length - 1) {
+    const siguiente = LUNA_2026[idxLuna + 1];
+    const spartes = siguiente.fecha.split('-').map(Number);
+    const ds = new Date(2026, spartes[0]-1, spartes[1]);
+    const partesMasProxima = masProxima.fecha.split('-').map(Number);
+    const dm2 = new Date(2026, partesMasProxima[0]-1, partesMasProxima[1]);
+    const totalDias = (ds - dm2) / 86400000;
+    const diasDesde = (dx - dm2) / 86400000;
+    progreso = diasDesde / totalDias;
+  }
+  const fasesOrdenadas = [
+    {fase:'Nueva', icono:'🌑'},
+    {fase:'Creciente', icono:'🌒'},
+    {fase:'Cuarto creciente', icono:'🌓'},
+    {fase:'Gibosa creciente', icono:'🌔'},
+    {fase:'Llena', icono:'🌕'},
+    {fase:'Gibosa menguante', icono:'🌖'},
+    {fase:'Cuarto menguante', icono:'🌗'},
+    {fase:'Menguante', icono:'🌘'},
+  ];
+  const faseBase = idx * 2;
+  const faseProg = Math.round(faseBase + progreso * 2) % 8;
+  return {fase: fasesOrdenadas[faseProg].fase, icono: fasesOrdenadas[faseProg].icono, exacta: false};
+}
+
+// ─── RENDERIZADO PRINCIPAL ────────────────────────────
+function renderizar(fecha) {
+  const d = fecha.getDate();
+  const m = fecha.getMonth() + 1;
+  const a = fecha.getFullYear();
+  const diaSemana = fecha.getDay();
+  const key = m + '-' + d;
+
+  // ¿Domingo o festivo?
+  const esDomingo = diaSemana === 0;
+  const esFestivoNac = !!FESTIVOS_NAC[key];
+  const esFestivoLlanes = !!FESTIVOS_LLANES[key];
+  const esFestivoPosada = !!FESTIVOS_POSADA[key];
+  const esFestivoNueva = !!FESTIVOS_NUEVA[key];
+  const esFestivo = esDomingo || esFestivoNac || esFestivoLlanes;
+
+  // Número del día
+  const numDia = document.getElementById('numero-dia');
+  numDia.textContent = d < 10 ? '0' + d : d;
+  numDia.className = 'numero-dia' + (esFestivo ? ' festivo' : '');
+
+  const nombreDiaEl = document.getElementById('nombre-dia-completo');
+  nombreDiaEl.textContent = DIAS_SEMANA[diaSemana].charAt(0).toUpperCase() + DIAS_SEMANA[diaSemana].slice(1);
+  nombreDiaEl.className = 'nombre-dia-completo' + (esFestivo ? ' festivo' : '');
+
+  // Mes y año
+  document.getElementById('mes-texto').textContent = MESES[m-1];
+  document.getElementById('anyo-texto').textContent = a;
+
+  // Etiqueta HOY
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  const esHoy = fecha.getTime() === hoy.getTime();
+  document.getElementById('etiqueta-hoy').textContent = esHoy ? '— HOY —' : '— DÍA —';
+
+  // BADGES
+  const cont = document.getElementById('badges-contenedor');
+  cont.innerHTML = '';
+  const addBadge = (texto, tipo) => {
+    const b = document.createElement('span');
+    b.className = 'badge badge-' + tipo;
+    b.textContent = texto;
+    cont.appendChild(b);
+  };
+
+  if (esDomingo) addBadge('🔴 Domingo', 'festivo');
+  if (esFestivoNac) addBadge(FESTIVOS_NAC[key].icono + ' ' + FESTIVOS_NAC[key].nombre, 'festivo');
+  if (esFestivoLlanes) addBadge(FESTIVOS_LLANES[key].icono + ' ' + FESTIVOS_LLANES[key].nombre, 'local');
+  if (esFestivoPosada) addBadge(FESTIVOS_POSADA[key].icono + ' ' + FESTIVOS_POSADA[key].nombre, 'local');
+  if (esFestivoNueva) addBadge(FESTIVOS_NUEVA[key].icono + ' ' + FESTIVOS_NUEVA[key].nombre, 'local');
+
+  const estacion = ESTACIONES[key];
+  if (estacion) addBadge(estacion.nombre, 'estacion');
+
+  const especial = FECHAS_ESPECIALES[key];
+  if (especial) {
+    const tipo = especial.tipo === 'amor' ? 'amor' : especial.tipo === 'mujer' ? 'mujer' : 'especial';
+    addBadge(especial.texto, tipo);
+  }
+
+  if (key === ECLIPSE_KEY) addBadge('🌑 ECLIPSE TOTAL DE SOL HOY', 'eclipse');
+
+  if (key === '7-18') addBadge('🌸 ¡Feliz día, Marinas!', 'especial');
+  if (key === '1-17') addBadge('🐴 ¡Feliz San Antón!', 'especial');
+
+  // DÍA MUNDIAL
+  const mundial = DIAS_MUNDIALES[key];
+  document.getElementById('mundial-texto').textContent = mundial || '📅 Día sin efeméride mundial destacada';
+
+  // LUNA
+  const luna = getLunaFase(m, d);
+  document.getElementById('luna-icon').textContent = luna.icono;
+  document.getElementById('luna-nombre').textContent = luna.fase + (luna.exacta ? ' (hoy exacta)' : '');
+  document.getElementById('luna-desc').textContent = luna.exacta ? '⚡ Fase lunar exacta hoy' : 'Fase aproximada';
+
+  // SOL
+  const sol = getSolLlanes(m, d);
+  document.getElementById('sol-amanecer').textContent = sol.amanecer + ' h';
+  document.getElementById('sol-ocaso').textContent = sol.ocaso + ' h';
+
+  // SANTORAL
+  const santo = SANTORAL[key] || {nombre:'(Sin datos del santoral)', desc:''};
+  document.getElementById('santo-nombre').textContent = santo.nombre;
+  document.getElementById('santo-desc').textContent = santo.desc;
+
+  // FRASE DEL DÍA (basada en el día del año para variedad)
+  const diaAnyo2 = Math.round((fecha - new Date(a, 0, 1)) / 86400000);
+  const frase = FRASES[diaAnyo2 % FRASES.length];
+  document.getElementById('frase-texto').textContent = frase.frase;
+  document.getElementById('frase-autor').textContent = frase.autor;
+
+  // FAMOSOS
+  const famosos = FAMOSOS[key] || [];
+  const fl = document.getElementById('famosos-lista');
+  if (famosos.length === 0) {
+    fl.innerHTML = '<div class="famoso-item"><span class="famoso-emoji">🎂</span><div><div class="famoso-nombre">Sin cumpleaños destacados hoy</div></div></div>';
+  } else {
+    fl.innerHTML = famosos.map(f => {
+      const edad = f.nacimiento > 0 ? (a - f.nacimiento) + ' años' : '';
+      return `<div class="famoso-item">
+        <span class="famoso-emoji">${f.emoji}</span>
+        <div>
+          <div class="famoso-nombre">${f.nombre}</div>
+          <div class="famoso-datos">${f.datos}</div>
+        </div>
+        ${edad ? `<span class="famoso-edad">${edad}</span>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  // Eclipse badge especial si la sección eclipse es el día
+  document.getElementById('eclipse-seccion').style.display = '';
+}
+
+// ─── NAVEGACIÓN ───────────────────────────────────────
+function cambiarDia(delta) {
+  fechaActual = new Date(fechaActual.getTime() + delta * 86400000);
+  renderizar(fechaActual);
+  document.getElementById('tarjeta').style.animation = 'none';
+  requestAnimationFrame(() => {
+    document.getElementById('tarjeta').style.animation = '';
+  });
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function volverHoy() {
+  fechaActual = new Date();
+  fechaActual.setHours(0,0,0,0);
+  renderizar(fechaActual);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ─── SWIPE en móvil ──────────────────────────────────
+let startX = 0;
+document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if (Math.abs(dx) > 50) cambiarDia(dx < 0 ? 1 : -1);
+});
+
+// ─── INICIO ──────────────────────────────────────────
+renderizar(fechaActual);
+</script>
+</body>
+</html>
