@@ -611,6 +611,61 @@
   .flecha { font-size: 16px; }
 
   /* ══════════════════════════════
+     WIKIPEDIA API BLOCK
+  ══════════════════════════════ */
+  .wiki-bloque {
+    background: linear-gradient(135deg, #F0F4FF 0%, #F8F0FF 100%);
+    border: 1px solid rgba(80,100,220,0.18);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 8px;
+  }
+  .wiki-titulo {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: #3A4CC0;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .wiki-lista { display: flex; flex-direction: column; gap: 7px; }
+  .wiki-item {
+    font-size: 12.5px;
+    color: #2A2A2A;
+    line-height: 1.5;
+    padding-left: 10px;
+    border-left: 2px solid rgba(80,100,220,0.3);
+  }
+  .wiki-item .wiki-anyo {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: #3A4CC0;
+    margin-right: 5px;
+  }
+  .wiki-cargando {
+    font-size: 12px;
+    color: var(--gris-medio);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .wiki-spinner {
+    width: 12px; height: 12px;
+    border: 2px solid rgba(80,100,220,0.2);
+    border-top-color: #3A4CC0;
+    border-radius: 50%;
+    animation: girar 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  .wiki-error { font-size: 11.5px; color: #888; font-style: italic; }
+
+  /* ══════════════════════════════
      PIE
   ══════════════════════════════ */
   .pie {
@@ -709,12 +764,22 @@
       </div>
     </div>
 
-    <!-- DÍA MUNDIAL -->
+    <!-- EFEMÉRIDES -->
     <div class="seccion">
       <div class="seccion-titulo">✦ Efemérides del día</div>
       <div class="mundial-bloque">
         <span class="mundial-titulo">🌍 Día Mundial</span>
         <div class="mundial-texto" id="mundial-texto">Cargando...</div>
+      </div>
+      <div class="mundial-bloque" id="espana-bloque" style="margin-top:8px; background: linear-gradient(135deg, #FFF3E0 0%, #FFF8F2 100%); border: 1px solid rgba(196,90,0,0.18);">
+        <span class="mundial-titulo" style="color:#C45A00;">🇪🇸 Efeméride de España / Asturias</span>
+        <div class="mundial-texto" id="espana-texto" style="color:#5D3000;"></div>
+      </div>
+      <div class="wiki-bloque" id="wiki-bloque">
+        <div class="wiki-titulo">📖 Wikipedia · Efemérides históricas</div>
+        <div id="wiki-contenido">
+          <div class="wiki-cargando"><div class="wiki-spinner"></div> Consultando Wikipedia en español...</div>
+        </div>
       </div>
     </div>
 
@@ -732,19 +797,8 @@
       </div>
     </div>
 
-    <!-- RITUAL TAQUERO -->
-    <div class="seccion">
-      <div class="seccion-titulo">✦ Ritual Taquero</div>
-      <div class="ritual-bloque">
-        <div class="ritual-titulo">📋 Cómo usar este calendario</div>
-        <div class="ritual-texto">
-          Cada mañana, arranca mentalmente esta hoja del taco, léela con calma y quédate con su esencia. Consulta el santoral para recordar felicitaciones, vigila la luna para tus planes y usa las flechas de abajo para explorar días pasados o futuros. ¡El año 2026 te espera, día a día, taco a taco!
-        </div>
-      </div>
-    </div>
-
-    <!-- ECLIPSE (siempre visible) -->
-    <div class="seccion" id="eclipse-seccion">
+    <!-- ECLIPSE (solo visible el 12 de agosto) -->
+    <div class="seccion" id="eclipse-seccion" style="display:none">
       <div class="seccion-titulo">✦ Eclipse Solar 2026</div>
       <div class="eclipse-bloque">
         <span class="eclipse-titulo-top">🌑 Eclipse Total de Sol · Asturias</span>
@@ -1230,7 +1284,7 @@ const DIAS_MUNDIALES = {
   '3-21': '🌸 Día Mundial de la Poesía · Día Internacional de la Eliminación de la Discriminación Racial',
   '3-22': '💧 Día Mundial del Agua',
   '3-23': '🌤️ Día Meteorológico Mundial',
-  '3-25': '🎭 Día Mundial del Teatro (conmemoración previa)',
+  '3-27': '🎭 Día Mundial del Teatro',
   '4-2':  '📖 Día Internacional del Libro Infantil',
   '4-7':  '🏥 Día Mundial de la Salud',
   '4-22': '🌍 Día de la Tierra',
@@ -1248,7 +1302,7 @@ const DIAS_MUNDIALES = {
   '7-18': '🕊️ Día Nelson Mandela',
   '7-26': '♿ Día Internacional en Apoyo de las Víctimas de la Tortura',
   '8-9':  '🌏 Día Internacional de los Pueblos Indígenas',
-  '8-12': '👦 Día Internacional de la Juventud · 🌑 Eclipse Total de Sol en Asturias (≈20:30 h)',
+  '8-12': '👦 Día Internacional de la Juventud',
   '9-5':  '❤️ Día Internacional de la Caridad (Teresa de Calcuta)',
   '9-16': '🌐 Día Internacional de la Preservación de la Capa de Ozono',
   '9-21': '🕊️ Día Internacional de la Paz',
@@ -1261,6 +1315,58 @@ const DIAS_MUNDIALES = {
   '12-1': '🎗️ Día Mundial del SIDA',
   '12-3': '♿ Día Internacional de las Personas con Discapacidad',
   '12-10':'📜 Día de los Derechos Humanos',
+};
+
+// ─── EFEMÉRIDES DE ESPAÑA ─────────────────────────────
+const EFEMERIDES_ESPANA = {
+  '1-2':  '🏰 1492 · Rendición de Granada. Los Reyes Católicos entran en la ciudad, fin de la Reconquista',
+  '1-6':  '👑 Día de Reyes. España celebra la cabalgata de los Reyes Magos, una de las tradiciones más queridas del país',
+  '1-14': '🎭 1939 · Nacimiento de Ángel González, poeta asturiano de la Generación del 50, uno de los grandes de la lírica española',
+  '1-17': '🐴 Día de San Antón · En toda España se bendicen animales domésticos en honor al patrón de los animales',
+  '1-23': '✒️ Festividad de San Ildefonso, patrón de Toledo · Día de la Lotería del Niño (celebración por el sorteo)',
+  '1-28': '⚓ 1820 · Pronunciamiento de Riego en Cabezas de San Juan. Inicio del Trienio Liberal en España',
+  '2-11': '🔬 1847 · Nace Thomas Edison. Aunque es estadounidense, su invención de la bombilla transformó también España',
+  '2-15': '⛵ 1898 · Explosión del USS Maine en La Habana, desencadenante de la Guerra Hispano-Estadounidense',
+  '2-19': '🎨 1473 · Nace Nicolás Copérnico. Su teoría heliocéntrica influyó en los científicos españoles del Renacimiento',
+  '3-1':  '⛪ Festividad de San Rosendo, patrón de Mondoñedo (Galicia) · Figura clave de la historia medieval gallega',
+  '3-11': '💔 2004 · Atentados del 11-M en Madrid. 193 personas fallecidas en los trenes de cercanías. Día del recuerdo',
+  '3-14': '🔬 1939 · Nace el físico español Miguel Ángel Virasoro, pionero de la teoría de cuerdas',
+  '3-19': '🌿 Día del Padre en España · Coincide con la festividad de San José',
+  '3-22': '🎨 1746 · Nace Francisco de Goya en Fuendetodos (Zaragoza), el pintor más universal de España',
+  '3-28': '🎭 1515 · Nace Santa Teresa de Jesús en Ávila, mística, escritora y reformadora del Carmelo',
+  '4-1':  '🗓️ 1939 · Fin de la Guerra Civil Española con el último parte de guerra firmado por Franco',
+  '4-14': '🇪🇸 1931 · Proclamación de la Segunda República Española. Alfonso XIII abandona España',
+  '4-15': '🎨 1452 · Nace Leonardo da Vinci, cuyas obras se conservan en museos españoles como el Prado',
+  '4-23': '📚 Día de Sant Jordi en Cataluña · Se regalan rosas y libros. Patrón de Cataluña y Aragón',
+  '4-26': '💣 1937 · Bombardeo de Guernica por la Legión Cóndor alemana durante la Guerra Civil',
+  '5-2':  '⚔️ 1808 · Levantamiento del pueblo de Madrid contra la ocupación francesa. Inicio de la Guerra de la Independencia',
+  '5-3':  '🏔️ Día de la Cruz en Andalucía · Tradición popular de engalanar cruces con flores en patios y plazas',
+  '5-15': '🌼 San Isidro · Fiestas de Madrid, patrón de la ciudad. Verbenas, chotis y trajes típicos madrileños',
+  '5-17': '📖 Día das Letras Galegas · Celebración de la lengua y literatura gallega, instituida en 1963',
+  '5-29': '⚽ 1968 · El Real Madrid gana su sexta Copa de Europa en Wembley, la primera bajo la dirección de Di Stéfano',
+  '6-3':  '🎾 Nacimiento de Rafael Nadal (1986). Tenista español, 14 veces campeón de Roland Garros',
+  '6-15': '📜 1215 · Firma de la Magna Carta, documento que inspiró las constituciones modernas incluyendo la española',
+  '6-24': '⚽ 1982 · España acoge el Mundial de Fútbol. La selección española llega a segunda fase',
+  '7-6':  '🐂 Inicio de los Sanfermines en Pamplona · El encierro de los toros, declarado Fiesta de Interés Turístico Internacional',
+  '7-9':  '🎭 1895 · Nace el escritor Ramón Gómez de la Serna, creador de las greguerías',
+  '7-14': '🎼 1865 · Nace el compositor Enrique Granados, uno de los más grandes músicos españoles',
+  '7-18': '🌸 Día de Santa Marina, patrona de varios municipios del norte de España · Gran devoción en Asturias y Galicia',
+  '7-25': '✝️ Día de Santiago Apóstol · Patrón de España. En años santos el Camino de Santiago tiene especial relevancia',
+  '8-2':  '🏖️ Fiestas del Descenso del Sella en Arriondas (Asturias) · La fiesta fluvial más popular del norte de España',
+  '8-15': '🕊️ La Asunción · Fiestas patronales en toda España. Verbenas y celebraciones en cientos de municipios',
+  '9-11': '🌹 Diada Nacional de Cataluña · Conmemoración de la caída de Barcelona en 1714 durante la Guerra de Sucesión',
+  '9-14': '🌊 Día de la Marina Asturiana · El Cristo de Llanes y múltiples fiestas en la costa cantábrica',
+  '9-19': '🩸 Milagro de San Jenaro en Nápoles · Venerado también en comunidades italianas y del sur de España',
+  '10-12':'🇪🇸 Día de la Fiesta Nacional de España y de la Hispanidad · Desfile militar en Madrid. Se conmemora el 12-Oct-1492',
+  '10-25':'🎨 1881 · Nace Pablo Picasso en Málaga, el pintor español más influyente del siglo XX',
+  '11-1': '🕯️ Día de Todos los Santos · Visita a los cementerios, flores y velas. Tradición muy arraigada en toda España',
+  '11-9': '🏛️ 1978 · Se aprueba en referéndum la Constitución Española (el 6 de diciembre entra en vigor)',
+  '11-20':'⚫ 1975 · Muere el dictador Francisco Franco. Inicio de la Transición española a la democracia',
+  '12-3': '🧭 1552 · Muere Francisco Javier, navarro, jesuita y patrono de Navarra, en la isla de Sancián (China)',
+  '12-6': '📜 1978 · Día de la Constitución Española · Aprobada en referéndum. Pilar de la democracia española',
+  '12-11':'👑 1968 · Nace el Rey Felipe VI en Madrid. Rey de España desde 2014',
+  '12-12':'🌹 Nuestra Señora de Guadalupe, patrona de Extremadura y de toda Hispanoamérica',
+  '12-25':'🎄 Navidad · España celebra con Nochebuena en familia, turrones, belenes y la Lotería de Navidad',
 };
 
 // ─── FRASES DEL DÍA ────────────────────────────────────
@@ -1812,6 +1918,80 @@ function getLunaFase(mes, dia) {
   return {fase: fasesOrdenadas[faseProg].fase, icono: fasesOrdenadas[faseProg].icono, exacta: false};
 }
 
+// ─── CACHÉ WIKIPEDIA ─────────────────────────────────
+const wikiCache = {};
+
+// ─── PALABRAS CLAVE ESPAÑA / ASTURIAS ────────────────
+const KEYWORDS_ES = [
+  'españa','español','española','españoles','españolas',
+  'madrid','barcelona','sevilla','valencia','bilbao','zaragoza',
+  'asturias','asturiano','asturiana','oviedo','gijón','gijon','avilés','aviles','llanes','cantábrico',
+  'hispano','hispana','ibérico','ibérica','peninsula ibérica',
+  'aragón','castilla','andalucía','cataluña','galicia','euskadi','navarra','extremadura',
+  'rey de españa','reino de españa','república española','franquismo','franco',
+  'reconquista','inquisición','guerra civil','independencia española',
+  'real madrid','barcelona fc','atletico','osasuna',
+];
+
+function contieneKeywordES(texto) {
+  const t = texto.toLowerCase();
+  return KEYWORDS_ES.some(k => t.includes(k));
+}
+
+function renderWikiItems(events) {
+  if (!events || events.length === 0) {
+    return '<div class="wiki-error">No se encontraron efemérides en Wikipedia para este día.</div>';
+  }
+  // Filtrar primero los que tienen relación con España/Asturias, el resto al final
+  const esItems = events.filter(e => contieneKeywordES(e.text || ''));
+  const otros = events.filter(e => !contieneKeywordES(e.text || ''));
+  // Mostrar hasta 3 de España/Asturias + 2 generales
+  const mostrar = [...esItems.slice(0, 4), ...otros.slice(0, 2)];
+  if (mostrar.length === 0) return '<div class="wiki-error">Sin efemérides destacadas para este día.</div>';
+  return '<div class="wiki-lista">' + mostrar.map(e => {
+    const anyo = e.year ? `<span class="wiki-anyo">${e.year}</span>` : '';
+    const texto = (e.text || '').replace(/\s+/g, ' ').trim();
+    return `<div class="wiki-item">${anyo}${texto}</div>`;
+  }).join('') + '</div>';
+}
+
+async function cargarWikipedia(mes, dia) {
+  const cacheKey = mes + '-' + dia;
+  const contenedor = document.getElementById('wiki-contenido');
+  if (!contenedor) return;
+
+  // Si ya está en caché, mostrar directamente
+  if (wikiCache[cacheKey]) {
+    contenedor.innerHTML = renderWikiItems(wikiCache[cacheKey]);
+    return;
+  }
+
+  // Mostrar spinner
+  contenedor.innerHTML = '<div class="wiki-cargando"><div class="wiki-spinner"></div> Consultando Wikipedia en español...</div>';
+
+  const mm = String(mes).padStart(2, '0');
+  const dd = String(dia).padStart(2, '0');
+  const url = `https://api.wikimedia.org/feed/v1/wikipedia/es/onthisday/all/${mm}/${dd}`;
+
+  try {
+    const resp = await fetch(url, {
+      headers: { 'Api-User-Agent': 'CalendarioElTaco/1.0 (Llanes, Asturias; contacto publico)' }
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    // La API devuelve: { events: [], births: [], deaths: [], holidays: [], selected: [] }
+    // Mezclamos events + holidays, priorizando España
+    const todos = [
+      ...(data.events || []),
+      ...(data.holidays || []),
+    ];
+    wikiCache[cacheKey] = todos;
+    contenedor.innerHTML = renderWikiItems(todos);
+  } catch(err) {
+    contenedor.innerHTML = '<div class="wiki-error">⚠️ No se pudo cargar Wikipedia. Comprueba tu conexión.</div>';
+  }
+}
+
 // ─── RENDERIZADO PRINCIPAL ────────────────────────────
 function renderizar(fecha) {
   const d = fecha.getDate();
@@ -1877,9 +2057,21 @@ function renderizar(fecha) {
   if (key === '7-18') addBadge('🌸 ¡Feliz día, Marinas!', 'especial');
   if (key === '1-17') addBadge('🐴 ¡Feliz San Antón!', 'especial');
 
-  // DÍA MUNDIAL
+  // EFEMÉRIDES (mundiales + España + Wikipedia)
   const mundial = DIAS_MUNDIALES[key];
-  document.getElementById('mundial-texto').textContent = mundial || '📅 Día sin efeméride mundial destacada';
+  const espana = EFEMERIDES_ESPANA[key];
+  const mundialEl = document.getElementById('mundial-texto');
+  const espanaEl = document.getElementById('espana-texto');
+  const espanaBloque = document.getElementById('espana-bloque');
+  mundialEl.textContent = mundial || '📅 Día sin efeméride mundial destacada';
+  if (espana) {
+    espanaEl.textContent = espana;
+    espanaBloque.style.display = '';
+  } else {
+    espanaBloque.style.display = 'none';
+  }
+  // Wikipedia API
+  cargarWikipedia(m, d);
 
   // LUNA
   const luna = getLunaFase(m, d);
@@ -1922,8 +2114,8 @@ function renderizar(fecha) {
     }).join('');
   }
 
-  // Eclipse badge especial si la sección eclipse es el día
-  document.getElementById('eclipse-seccion').style.display = '';
+  // Eclipse: solo visible el 12 de agosto
+  document.getElementById('eclipse-seccion').style.display = (key === ECLIPSE_KEY) ? '' : 'none';
 }
 
 // ─── NAVEGACIÓN ───────────────────────────────────────
