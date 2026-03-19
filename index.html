@@ -231,6 +231,7 @@
   .badge-eclipse { background: #1A1A2E; color: #F4D35E; border: 1px solid #F4D35E; }
   .badge-mundial { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
   .badge-amor    { background: #FCE4EC; color: #AD1457; border: 1px solid #F48FB1; }
+  .badge-horario { background: #E8EAF6; color: #283593; border: 1px solid #9FA8DA; }
   .badge-mujer   { background: #F3E5F5; color: #7B1FA2; border: 1px solid #CE93D8; }
 
   /* ══════════════════════════════
@@ -888,9 +889,15 @@ const FECHAS_ESPECIALES = {
 // ─── ESTACIONES 2026 ───────────────────────────────────
 const ESTACIONES = {
   '3-20':  {nombre:'🌱 Comienza la Primavera', hora:'15:46 h (hora peninsular)', detalle:'En el hemisferio sur comienza el otoño.'},
-  '6-21':  {nombre:'☀️ Comienza el Verano',    hora:'10:24 h (hora peninsular)', detalle:'El día más largo del año.'},
+  '6-21':  {nombre:'☀️ Comienza el Verano',    hora:'08:24 h (hora peninsular)', detalle:'El día más largo del año.'},
   '9-23':  {nombre:'🍂 Comienza el Otoño',     hora:'02:05 h (hora peninsular)', detalle:'Equinoccio de otoño.'},
   '12-21': {nombre:'❄️ Comienza el Invierno',  hora:'21:50 h (hora peninsular)', detalle:'El día más corto del año.'},
+};
+
+// ─── CAMBIOS DE HORARIO 2026 ───────────────────────────
+const CAMBIOS_HORARIO = {
+  '3-29':  {texto:'🕐 Horario de verano · Las 02:00 pasan a ser las 03:00', icono:'🕑'},
+  '10-25': {texto:'🕐 Horario de invierno · Las 03:00 pasan a ser las 02:00', icono:'🕓'},
 };
 
 // ─── ECLIPSE ───────────────────────────────────────────
@@ -2044,7 +2051,10 @@ function renderizar(fecha) {
   if (esFestivoNueva) addBadge(FESTIVOS_NUEVA[key].icono + ' ' + FESTIVOS_NUEVA[key].nombre, 'local');
 
   const estacion = ESTACIONES[key];
-  if (estacion) addBadge(estacion.nombre, 'estacion');
+  if (estacion) addBadge(estacion.nombre + ' · ' + estacion.hora, 'estacion');
+
+  const cambioHorario = CAMBIOS_HORARIO[key];
+  if (cambioHorario) addBadge(cambioHorario.texto, 'horario');
 
   const especial = FECHAS_ESPECIALES[key];
   if (especial) {
